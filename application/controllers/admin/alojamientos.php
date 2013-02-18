@@ -561,7 +561,7 @@ class Alojamientos extends CI_Controller
                 }
             }
         }
-        //redirect('admin/alojamientos/form_view/' . $id_alojamiento . "/?pestania=imagenes", 'refresh');
+        redirect('admin/alojamientos/form_view/' . $id_alojamiento . "/?pestania=imagenes", 'refresh');
     }
 
 //#########################----------- Funciones Habitacion-------------#####################################    
@@ -755,7 +755,7 @@ class Alojamientos extends CI_Controller
             $this->alojamientos_model->update($post_array['ID_Habitacion'], $habitaciones_array, 'ID_Habitacion', 'habitaciones');
         }
 
-        //redirect('admin/alojamientos/form_view/' . $id_alojamiento . "/?pestania=habitaciones", 'refresh');
+        redirect('admin/alojamientos/form_view/' . $id_alojamiento . "/?pestania=habitaciones", 'refresh');
     }
 
     function alojamientos_habitaciones_imagenes_save()
@@ -774,39 +774,35 @@ class Alojamientos extends CI_Controller
 
                 //Borrar las imagenes de la tabla imagenes_alojamientos ya que se agregaran varias mas
                 if ($tipo == 'foto_comun')
-                    $this->alojamientos_model->images_delete_nombre_imagen($id_alojamiento, $nombre_imagen);
+                    $this->alojamientos_model->imageshab_delete_nombre_imagen($id_habitacion, $nombre_imagen);
                 elseif ($tipo == 'muchas_fotos')
-                    $this->alojamientos_model->images_delete($id_alojamiento);
+                    $this->alojamientos_model->imageshab_delete($id_habitacion);
 
                 $i = 0;
                 foreach ($_FILES['filesToUpload']['tmp_name'] as $file)
                 {
-
                     $i++;
-
-                    $cantidad_fotos = $this->alojamientos_model->images_count($id_alojamiento);
+                    $cantidad_fotos = $this->alojamientos_model->imageshab_count($id_habitacion);
                     $cantidad_fotos = $cantidad_fotos + 1;
-
                     if ($cantidad_fotos <= 12)
                     {
-
                         if ($tipo == 'muchas_fotos')
                         {
-                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $i . ".jpg";
-                            $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $i . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $i . ".jpg";
+                            $image_name = $this->config->item('upload_path_hab') . $id_habitacion . "_" . $i . ".jpg";
+                            $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_habitacion . "_" . $i . "_p" . ".jpg";
+                            $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_habitacion . "_" . $i . ".jpg";
                         }
                         elseif ($tipo == 'foto_comun')
                         {
-                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
-                            $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $nombre_imagen . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $nombre_imagen . ".jpg";
+                            $image_name = $this->config->item('upload_path_hab') . $id_habitacion . "_" . $nombre_imagen . ".jpg";
+                            $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_habitacion . "_" . $nombre_imagen . "_p" . ".jpg";
+                            $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_habitacion . "_" . $nombre_imagen . ".jpg";
                         }
                         elseif ($tipo == 'foto_mas')
                         {
-                            $image_name = $this->config->item('upload_path') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
-                            $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $cantidad_fotos . "_p" . ".jpg";
-                            $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_alojamiento . "_" . $cantidad_fotos . ".jpg";
+                            $image_name = $this->config->item('upload_path_hab') . $id_habitacion . "_" . $cantidad_fotos . ".jpg";
+                            $thumb_grande = $this->config->item('upload_path_hab_thumb') . $id_habitacion . "_" . $cantidad_fotos . "_p" . ".jpg";
+                            $thumb_chica = $this->config->item('upload_path_hab_thumb') . $id_habitacion . "_" . $cantidad_fotos . ".jpg";
                         }
 
 
@@ -855,11 +851,11 @@ class Alojamientos extends CI_Controller
 
                         //Guardar imagenes en la table alojamientos_imagenes
                         if ($tipo == 'foto_comun')
-                            $this->alojamientos_model->images_save($id_alojamiento, $nombre_imagen);
+                            $this->alojamientos_model->imageshab_save($id_habitacion, $nombre_imagen);
                         elseif ($tipo == 'muchas_fotos')
-                            $this->alojamientos_model->images_save($id_alojamiento, $i);
+                            $this->alojamientos_model->imageshab_save($id_habitacion, $i);
                         elseif ($tipo == 'foto_mas')
-                            $this->alojamientos_model->images_save($id_alojamiento, $cantidad_fotos);
+                            $this->alojamientos_model->imageshab_save($id_habitacion, $cantidad_fotos);
                     }
                 }
             }
