@@ -1,0 +1,5 @@
+<tr>
+<?php
+echo '<td class=calboton colspan='.$iColumnasCal.'><input class=calgen type=image value="Actualizar" onclick="javascript:actualizar()" src="boton actualizar.JPG"></td>';
+?>
+</tr>

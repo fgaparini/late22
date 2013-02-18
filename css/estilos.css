@@ -1,0 +1,429 @@
+
+html, body{
+width:100%;
+height:100%;
+} 
+
+
+#general{width: 100%;height:100%;}
+#contenedor {
+width: 1000px;
+height: 800px;
+background-color: #eeeeee; 
+}	
+#contenedor2 {
+width: 100%;
+background-color: #eee;
+position: relative; 
+}
+.clear{clear: both;}	
+#divHeader{height: 110px; padding: 3px; width: 1000px; }
+.pru { background-color: red; width: 100%; height: 200px;}
+.clear { clear: both;}
+
+#myCarousel { 
+padding: 0;
+z-index: 2;
+ width: 100%; 
+ height: 350px;
+ 
+ overflow: ;
+ }
+ #myCarousel img { width: 100%;
+ height: 350px; margin:0; padding: 0;}
+
+/* MENU */
+.fixed {background-color: rgba(255,255,255,0.8);box-shadow: 0 5px 7px #666;-moz-box-shadow: 0 5px 7px #666;-webkit-box-shadow: 0 5px 7px #666;	behavior: url(PIE.htc);}
+.nofixed {background-color: #FFF; height: 110px; width: 100%;} 
+#menu2{width: 100%; position:relative;height: 110px;background-color: #FFFFFF;position: fixed; top:0; left:0;z-index: 1000;  }
+#menu2>div{width: 83%; min-width: 990px; position: relative; height: 110px; background-color: ; }
+#menu2>div>ul {padding: 0px;
+margin:0;
+
+list-style: none;
+}
+#menu2>div>ul>img {display: inline-block; margin: 0 40px 0 0; vertical-align: top; }
+#menu2>div>ul>li.menuss {display:inline-block; ;bottom: 0; max-width: 140px; list-style: none;padding: 17px 6px 3px 6px; height: 70px; margin-top: 20px; color: #222;   }
+#menu2>div>ul>li.menuss span.title {font-size: 15px; padding:1px 0; margin:0;font-family: arial; font-weight: bold; }
+#menu2>div>ul>li.menuss span.info {font-size: 11px; line-height: 11px; font-family: arial;  font-weight: normal; }
+#menu2>div>ul>li.menuss:hover {color:#FF6803;background-color: }
+.submenu { padding: 7px; width: 90%; background-color: #FFFFFF;display:; box-shadow: -3px 5px 5px #666; -moz-box-shadow: -3px 5px 5px #666;-webkit-box-shadow: -3px 5px 5px #666;position: absolute; z-index: 200; 	behavior: url(PIE.htc);
+    top: 108px;
+    left: 0; }
+
+/* MENU INFERIOR */
+div.submenu ul {padding: 0px;margin:0;list-style: none;}
+ 
+div.submenu>div {border: 0 1px 0 1px solid #eee; vertical-align: top; display: inline-block; padding: 10px;}
+div.submenu>ul li, div.submenu>div>ul li  { margin: 5px; cursor: pointer;  }
+div.submenu a { font-family: arial; font-size: 12px; color:#222; text-decoration:none ;}
+div.submenu a:hover { color:#FF6803; text-decoration: none; }
+div.submenu h2 {font-family:Arial, Helvetica, sans-serif; font-size: 16px; margin: 0; padding: 5px 0; color: #222; font-weight: bold;}
+div.submenu img.ico { vertical-align: middle; margin: 4px;}
+
+.floatLeft {float:left; }
+.floatRight {float: right; }
+
+#imagen_fondo { width:100%; height: 300px; overflow: hidden; }
+
+.border_rigth  {height: 220px;  border-right: 1px solid #eee;}
+ul.twocolum li {display: inline-block; margin-right: 8px;}
+#alojamiento {width: 30%;height: 100%;}
+#tAventura {width: 30%;height: 100%;}
+#buscador_a{width:25%; height: ; }
+/* FORMULARIO RESERVA ONLINE */
+#bAlojar { /*background-color: #FFCEAE*/ background-color: #DCEA8E; margin:0 0px 2px 0px; padding: 8px; }
+#bAlojar input  { background: #FFF url("../imagenes/calendar.jpg") right no-repeat; width: 100%; height: 20px; padding: 5px; border: 1px #666 solid; margin: 7px 2px; border-radius: 4px; -moz-border-radius: 4px;-webkit-border-radius:4px; behavior: url(PIE.htc); font-size: 12px; font-family: Tahoma; color:#FF6803; }
+#bAlojar  select { height: 29px; padding: 5px; border: 1px #666 solid; margin: 7px 2px; border-radius: 4px; -moz-border-radius: 4px;-webkit-border-radius:4px; behavior: url(PIE.htc); font-size: 12px; font-family: Tahoma; color:#FF6803; }
+#bAlojar label { font-size: 12px; font-family: Tahoma; color:#222; font-weight: bold;}
+#bAlojar>div.fecha {display: inline-block; width:40%;}
+#bAlojar div {padding: 5px 5px;}
+#bAlojar button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 7px 10px;
+	background:linear-gradient(
+		top,
+		#bec73b 0%,
+		#73821d);
+	-pie-background: linear-gradient(
+		top,
+		#bec73b 0%,
+		#73821d);
+	background: -moz-linear-gradient(
+		top,
+		#bec73b 0%,
+		#73821d);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#bec73b),
+		to(#73821d));
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 7px;
+	border: 1px solid #2e3d05;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.6);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.6);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.6);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.2),
+		0px 1px 0px rgba(255,255,255,0.2);
+		behavior: url(PIE.htc);
+}
+#bAlojar button:hover{ background:#73821d; }
+
+/*  CONTENEDOR INFERIOR DESCUBRE */
+#block_inf { width: 100%; padding: 0px; margin: 0px;  border-top: 1px #eee solid; background-color: #fff;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;		behavior: url(PIE.htc);}
+#block_inf>div {display: inline-block;padding: 0px 5px; margin:0px;}
+#block_inf>div>img {padding: 0; margin: 0;}
+#block_inf>div>h3 a  {font-size: 12px;  font-family: tahoma; font-weight: bold; color:#666;text-decoration: none; margin:0; padding: 0px 2px;}
+#block_inf>div>h3 a:hover {color:#000;}
+#block_inf>div.telefonos { padding: 0 20px 0 50px; font-size: 15px;  font-family: tahoma; font-weight: bold; color:#0099FF;} 
+#block_inf>div.telefonos>img {margin: 0 10px 0 0;}
+/*  FIN CONTENEDOR INFERIOR DESCUBRE */
+
+.contac {padding: 0px; margin:0px;}
+
+/*  CONTENEDOR CIRCUITOS  */
+#circuitos>div {display: inline-block;padding: 0px 1px; width: 115px; }
+#circuitos>div>img {width: 100%; height: auto;}
+#circuitos>div>h3 {margin: 0; padding: 0;}
+#circuitos>div>h3 a{ font-size: 12px; margin: 0; padding: 2px 0 5px 0; font-family: tahoma; font-weight: bold; color:#222; text-decoration: none;} 
+#circuitos>div>h3 a:hover{ color:#FF6803}
+#circuitos>div:hover>img {opacity: 0.9;}
+/*  FIN CONTENEDOR CIRCUITOS  */
+
+/*  AGENDA */
+#agenda {background-color: #F4F4F4; width:230px; padding: 0 10px;}
+#agenda>div {width: 100%; border-bottom:1px #333 solid; padding: 3px 0; }
+#agenda>div:last-child {width: 100%; border-bottom:0px #333 solid; padding: 3px 0; }
+#agenda>div div {display: inline-block; vertical-align: top;}
+#agenda>div div.fecha_ag { background: url("../iconos/cal_agenda.png") no-repeat; display: inline-block; width:45px; height: 41px; padding:11px 0 0 5px;    }
+#agenda>div div.fecha_ag>p {font-family: tahoma; color:#666; font-size: 11px; font-weight: bold; }
+#agenda>div div.info_ag {width:168px; padding: 0 0 0 7px; display: inline-block;}
+#agenda>div div.info_ag>h3 {font-family: Arial; color:#000; font-size: 14px; font-weight: bold; ; margin: 0px}
+#agenda>div div.info_ag>p {font-family: arial; color: #666; font-size: 10px; font-weight: normal; }
+/*  FIN AGENDA  */
+
+/* --------RELOJ ---------------- */ 
+/* If you want you can use font-face */ @font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('BebasNeue-webfont.eot');
+    src: url('BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('BebasNeue-webfont.woff') format('woff'),
+         url('BebasNeue-webfont.ttf') format('truetype'),
+         url('BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container {width: 200px; margin: 0 auto; overflow: hidden; }
+
+.clock {width:185px; margin:0 auto; padding:7px; ; color:#000; }
+
+#Date { font-family: Arial, Helvetica, sans-serif; font-size:12px; text-align:center; color:#666;font-weight: bold; /*text-shadow:0 0 5px #FF6803;*/ }
+
+.clock ul { margin:0 auto; padding:0px; list-style:none; text-align:center; }
+.clock ul li { display: inline-block; font-size:35px; font-weight: bold; text-align:center; font-family: Arial, Helvetica, sans-serif; /*text-shadow:0 0 5px #FF6803;*/ }
+
+#point { position:relative; -moz-animation:mymove 1s ease infinite; -webkit-animation:mymove 1s ease infinite; padding-left:3px; padding-right:3px; } /* Simple Animation */
+@-webkit-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #FF6803;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #FF6803; }	
+}
+
+@-moz-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #FF6803;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #FF6803; }	
+}
+
+/* ============== */
+/*  CONTENIDOS */
+/* ============== */
+#cont_gral { width: 80%;background-color: #FFF;
+min-width: 990px;}
+#cont_gral>div {display: inline-block; vertical-align: top; }
+#cont_ppal {
+width: 55%; min-width: 550px; padding: 0 10px 40px 10px; margin-top:-40px;
+}
+
+
+#cont_ads {width: 40%; padding:0;}
+
+#cont_full { width: 80%;background-color: #FFF;
+min-width: 990px;}
+
+#cont_full h1 {color:#96A929; margin: 0 0 0 30px; font-family: Tahoma; font-size: 35px; text-shadow: 1px 2px 3px #222;  }
+#h12 {color:#96A929; font-family: 'Rancho',serif; font-size: 38px; }
+
+
+/* ----------tabs ----------------  */
+#tabs {border:0px solid #222; background-color:rgba(255,255,255,0.1); }
+#tabs>div {border:1px solid #d8dcdf;padding: 8px; margin: 0; }
+#tabs ul { background-color: none; border:none; }
+
+#tabs li { background :  #F4F4F4 !important;color:red !important;}
+
+#tabs li a { color:#666 !important; }
+#tabs li.ui-state-active {background :  #ffffff !important; margin-bottom: -2px;}
+ #tabs li.ui-state-active a  {color:#FF6803 !important;}
+
+#tabs .ui-state-default {
+    background-color:none;
+    color: #FF6803;
+}
+#tabs .ui-tabs-nav{background:none;}; 
+#tabs li:hover {background-color: #E3E9BE;}
+#alojar_tabs {width: 100%; }
+#alojar_tabs div {display: inline-block; position: relative; vertical-align: top; border:1px solid #d8dcdf; background-color: #fff; margin:8px 4px; padding: 5px; height: 110px; width: 45%;  }
+#alojar_tabs div:hover {background-color: #ECF0D5; border: 1px solid #CDD98C;}
+#alojar_tabs div img { width: 100px; height: 100px; float: left; margin:5px; }
+#alojar_tabs div h2 {font-family: Arial; color:#FF6803; font-size: 13px; padding:0px; font-weight: bold;  }
+#alojar_tabs div p {font-family: arial; color:#222; font-size: 10px; font-weight:normal; padding: 0; margin: 0;}
+#alojar_tabs div span.button a { padding: 4px; background-color:#FF6803; color:#FFF; font-family: arial; font-size: 10px; text-decoration: none;position: absolute; bottom: 0; right: 0;  }
+#alojar_tabs div span.button a:hover{text-decoration: underline;}
+
+
+/* destacamos */
+
+#destacamos {width: 100%; margin-top: 29px;}
+#destacamos h2 {font-family: arial; font-size: 24px; color: #000; border-bottom: 1px solid #ccc;padding: 0px 0; margin:0 }
+#destacamos>div { display: inline-block; vertical-align: top; border: 0px #CDD98C solid; margin:4px; padding: 8px; width: 45%;}
+#destacamos>div:hover {background-color: #F4F4F4;}
+#destacamos h3 {font-family: arial; font-size: 17px; color: #CDD98C; padding: 5px 0; margin: 0;}
+#destacamos>div>div.imag {overflow: hidden; width: 100%; height: 140px; }
+#destacamos p {font-family: arial; font-size: 12px; color: #666; margin: 0;}
+
+/* -------------------------- DIRECTORIOS -----------------------*/
+
+/* BUSCADOR */
+#buscar_FULL {background-color:#ECF0D5 ; width: 98%; height: 100%; padding: 5px; margin: 10px 0px;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px; box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc);  }
+#buscar_FULL div {display: inline-block; vertical-align: top;}
+#buscador_aloja {min-width:580px; width: 58%;  height: 300px; color:#6DCBE7; padding: 10px;}
+#buscador_aloja h2 {color: #96A929; font-family: Tahoma;font-size:25px; margin: 0; padding: 5px 0; font-weight: bold;  }
+#buscador_aloja p {color: #666; font-family: Tahoma;font-size:14px;font-weight: normal; }
+#buscador_aloja p>b {color: #FF6600; font-family: Tahoma;font-size:15px; }
+#buscador_aloja>div {display: inline-block;vertical-align: top; width: 35%; margin: 10px; }
+#buscador_aloja input  { background: #FFF url("../imagenes/calendar.jpg") right no-repeat; width: 90%; height: 26px; padding: 5px; border: 1px #666 solid; margin: 7px 2px; border-radius: 6px; -moz-border-radius: 6px;-webkit-border-radius:6px; behavior: url(PIE.htc); font-size: 12px; font-family: Tahoma; color:#96A929; }
+#buscador_aloja select { width: 90%; height: 35px; padding: 5px; border: 1px #666 solid; margin: 7px 2px; border-radius: 6px; -moz-border-radius: 6px;-webkit-border-radius:6px; behavior: url(PIE.htc); font-size: 12px; font-family: Tahoma; color:#96A929; }
+#buscador_aloja label {font-family: tahoma; color:#666; font-weight: bold; font-size: 14px;} 
+
+#asd_busca {width: 35%;min-width: 320px; margin: 0 5%x; ; }
+
+/* DIRECTORIO  */
+
+#dir_ { width: 97%; min-width: 990px; height: 100%; padding: 5px; margin: 10px 0px; box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc);  }
+#dir_dest{background-color:#D9E8FD ; border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;width: 97%; min-width: 990px; height: 100%; padding: 5px; margin: 10px 0px; box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;	behavior: url(PIE.htc); }
+#dir_>div  { display: inline-block; vertical-align: top; width:230px; position: relative; height: 210px; padding: 5px; border: 1px solid #ccc; background-color: #eeeeee; margin: 10px 4px;  }
+#dir_>div>h3  {margin: 0; padding: 4px 0 8px 0px; color:#FF6600; font-family: Tahoma;font-size: 15px;}
+#dir_>div>img.princ {width: 230px; height: 170px;}
+
+
+/* destacados  */
+#dir_dest h2 {margin: 0; padding: 4px 0px; color:#BAD6FC; font-family: Tahoma;font-size: 20px;}
+#dir_dest>div { display: inline-block; vertical-align: top; width:230px; position: relative; height: 210px; padding: 5px; border: 1px solid #ccc; background-color: #eeeeee; margin: 10px 4px;  }
+#dir_dest>div>h3 {margin: 0; padding: 4px 0 8px 0px; color:#FF6600; font-family: Tahoma;font-size: 15px;}
+#dir_dest>div>img.princ {width: 230px; height: 170px;}
+
+
+
+div.dir_H {background: -webkit-linear-gradient(63deg, #151515 5px, transparent 5px) 0 5px,
+            -webkit-linear-gradient(243deg, #151515 5px, transparent 5px) 10px 0px,
+            -webkit-linear-gradient(63deg, #222 5px, transparent 5px) 0px 10px,
+            -webkit-linear-gradient(243deg, #222 5px, transparent 5px) 10px 5px,
+            -webkit-linear-gradient(0deg, #1b1b1b 10px, transparent 10px),
+            -webkit-linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+background: -moz-linear-gradient(63deg, #151515 5px, transparent 5px) 0 5px,
+            -moz-linear-gradient(243deg, #151515 5px, transparent 5px) 10px 0px,
+            -moz-linear-gradient(63deg, #222 5px, transparent 5px) 0px 10px,
+            -moz-linear-gradient(243deg, #222 5px, transparent 5px) 10px 5px,
+            -moz-linear-gradient(0deg, #1b1b1b 10px, transparent 10px),
+            -moz-linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+            linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+            linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+            linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+            linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+            linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+background-size: 20px 20px;
+background-color: #131313;
+-pie-background: linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px / 20px,
+                 linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px / 20px,
+                 linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px / 20px,
+                 linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px / 20px,
+                 linear-gradient(90deg, #1b1b1b 10px, transparent 10px) 0 0 / 20px,
+                 linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424)
+                 0 0 / 20px #131313;
+behavior: url(PIE.htc);width:218px; color:#fff; position: absolute; height: 198px; left: 0;font-size: 11px; top: 0;padding:10px; display: none }
+
+.dir_H>h3 {margin: 15px 0 8px 0;margin:10px; padding: 4px 0px; color:#FF6600; font-family: Tahoma;font-size: 16px;}
+}
+
+.dir_H>p {color:#ccc; font-family: Tahoma; font-size: 15px; padding: 5px 20px;}
+}
+.dir_H img {margin: 5px 8px;}
+
+#dir_dest>div:hover>div.dir_H {display: block;}
+#dir_>div:hover>div.dir_H {display: block;}
+
+span.butons{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #96ba07;
+	padding: 8px 10px;
+	background: linear-gradient(
+		top,
+		#e0e0e0 0%,
+		#f5f5f5 50%,
+		#c1c2ba);
+	-pie-background: linear-gradient(
+		top,
+		#e0e0e0 0%,
+		#f5f5f5 50%,
+		#c1c2ba);
+	background: -moz-linear-gradient(
+		top,
+		#e0e0e0 0%,
+		#f5f5f5 50%,
+		#c1c2ba);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#e0e0e0),
+		color-stop(0.50, #f5f5f5),
+		to(#c1c2ba));
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	border-radius: 9px;
+	border: 1px solid #636363;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.2),
+		0px 1px 0px rgba(255,255,255,0.4);
+behavior: url(PIE.htc);
+cursor: pointer;
+}
+span.butons:hover {background: #FFF;}
+
+/* -------------------------- FIN DIRECTORIOS -----------------------*/
+
+
+
+
+/* -------------------------- ADS -----------------------*/
+.publi250x250 { background: url("../imagenes/publicidad250x250.png") no-repeat; width:261px; height: 260px;padding: 34px 10px 4px 10px; }
+/* -------------------------- FIN ADS -----------------------*/
+/* ============== */
+/*  FOOTER        */
+/* ============== */
+
+#footer2 {width: 100%; background-color: #fff; position: relative; padding: 0 0 0px 0 }
+
+.fotterTop {height: 50px; padding: 10px ; box-shadow: 0 2px 4px #ccc ;   box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;		behavior: url(PIE.htc);}
+.fotterTop .follow {font-family: "Times New Roman"; margin:0 10px 0 0; font-size: 20px; font-weight:bold; color: #222;}
+.fotterTop img {padding: 0 6px; vertical-align: middle;}
+/*ICNOS SOCIALEs */
+.imagico{width:35px; height:35px; margin:0 6px; cursor: pointer;  }
+.icofacebook {background: url("../iconos/fb_1.png") no-repeat;margin-top: 0; }
+.icofacebook:hover {background: url("../iconos/fb_12.png") no-repeat;}
+
+.icotwitter {background: url("../iconos/twitter_1.png") no-repeat;margin-top: 0;}
+.icotwitter:hover {background: url("../iconos/twitter_12.png") no-repeat;}
+
+.icogoogle {background: url("../iconos/google_plus.png") no-repeat;margin-top: 0;}
+.icogoogle:hover {background: url("../iconos/google_plus2.png") no-repeat;}
+
+.icopinterest {background: url("../iconos/pinterest.png") no-repeat;margin-top: 0;}
+.icopinterest:hover {background: url("../iconos/pinterest2.png") no-repeat;}
+
+
+.fotterTop>div{width: 80%; min-width: 990px; padding: 0 10px; box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;		behavior: url(PIE.htc);}
+.fotterTop>div div {display: inline-block; vertical-align: middle;}
+.footerBottom { width: 80%; min-width: 990px;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;		behavior: url(PIE.htc);}
+.footerBottom>div {display: inline-block; padding: 10px 12px; margin:0 10px; vertical-align: top;}
+.footerBottom>div.imag {margin: 0 40px 0 0;}
+.footerBottom>div.imag img {width: 240px; height: auto; margin: 30px 0 0 0;}
+.footerBottom>div h3 {font-family: tahoma; font-size: 13px;color:#FF6803 ;margin-bottom: 5px; padding: 0; font-weight: normal; }
+.footerBottom>div ul { margin: 0; padding: 0;   }
+.footerBottom>div ul li {list-style:  disc; color:#FF6803; padding: 4px 0; }
+.footerBottom>div ul li a {font-family: tahoma; font-size: 11px;color:#666 ; text-decoration: none;}
+.footerBottom>div ul li a:hover {color:#FF6803; text-decoration: underline;}
+
+.footerBottom2 { width: 100%; margin: 20px 0 0 0; background-color: #222;padding: 8px 0 ; box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;		behavior: url(PIE.htc);  }
+.footerBottom2 div{width: 80%; min-width: 990px;  box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;
+-o-box-sizing:border-box;-ms-box-sizing:border-box;		behavior: url(PIE.htc);}
+.footerBottom2 div span.title {color:#CDD98C; font-size: 12px; padding: 0 20px 0 0; font-family: arial; font-weight: bold; }
+.footerBottom2 div span {padding: 0 5px;}
+.footerBottom2 div span a {color:#ccc; font-size: 11px; font-family: arial; text-decoration: none }
+.footerBottom2 div span a:hover {text-decoration: underline;}
+
+div.ui-datepicker{
+ font-size:10px;
+}
+.ui-datepicker{ z-index: 9999 !important;}

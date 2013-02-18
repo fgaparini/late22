@@ -1,0 +1,45 @@
+body.base {background-color:#FFFFFF; link:white; visited:white;}
+
+table.calendario { border-collapse:collapse; border:1px solid gray; width:985px;}
+
+td.calfiltro {border:1px solid gray; background-color:#C2C2C2; text-align:right;}
+td.calmesdesc {border:1px solid gray; background-color:#EDEDED; text-align:center; height:28px;}
+td.caldesc {border:1px solid gray; background-color: #D2DEF0; text-align:center; width:120px; height:20px;}
+td.caldias {border:1px solid gray; background-color:#EDEDED ; text-align:center; width:120px; height:20px; }
+td.caldescactu {border:1px solid gray; background-color:#F2F5F9; text-align:center;}
+td.caldialab {border:1px solid gray; background-color:#EDEDED; text-align:center;}
+td.caldianolab {border:1px solid gray; background-color:#C2C2C2; text-align:center;}
+td.calasig {border:1px solid gray; background-color:#FFFFFF; text-align:center; }
+td.calesmi {border:1px solid gray; background-color:#FFFFFF; text-align:center; }
+td.caltarn {border:1px solid gray; background-color:#FFFFFF; text-align:center; }
+td.caltaro {border:1px solid gray; background-color: #E6ECF2; text-align:center; }
+td.caltaro2 {border:1px solid gray; background-color: #F00; color:#F00; text-align:center; }
+td.calres {border:1px solid gray; background-color:#FFFFFF; height:20px; text-align:center;}
+td.caldisp {border:1px solid gray; background-color: #C9FCCB ; height:20px; text-align:center;}
+td.calnodisp {border:1px solid gray; background-color:#FAD2D3; height:20px; text-align:center ;}
+td.calboton {border:1px solid gray; background-color:#FFFFFF; text-align:center;}
+td.calbloq {border:1px solid gray; background-color:#FFFFFF; text-align:center;}
+td.calactu {border:1px solid gray; background-color:#F2F5F9; text-align:center; height:25px;}
+
+font.calgen {color:#000000; font-family:arial; font-size:x-small; font-weight:normal; }
+font.calmesdesc {color:#000000; font-family:arial; font-size:x-small; font-weight:bold;}
+font.calmeslink {color:#000000; font-family:arial; font-size:xx-small; font-weight:normal;}
+
+a.cuerpocal {color:#000000; font-family:arial; font-size:x-small; font-weight:normal; text-decoration:none;}
+a.selcuerpocal {color:#000000; font-family:arial; font-size:x-small; font-weight:normal; text-decoration:underline;}
+
+select.calgen {color:#000000; font-family:arial; font-size:9pt;}
+select.calbloq {color:#000000; font-family:arial; font-size:xx-small; width:16px; width:10px}
+select.calasig {color:#000000; font-family:arial; font-size:xx-small; width:35px;}
+select.calesmi {color:#000000; font-family:arial; font-size:xx-small; width:22px;}
+select.caltarn {color:#000000; font-family:arial; font-size:xx-small; width:22px;}
+select.caltaro {color:#000000; font-family:arial; font-size:xx-small; width:22px;}
+input.calgen {color:#000000; font-family:arial; font-size: x-small;}
+input.calediasig {color:#000000; font-family:arial; font-size:xx-small; text-align:center; horizontal-align:middle; width:20px;}
+input.calediesmi {color:#000000; font-family:arial; font-size:xx-small; text-align:center; horizontal-align:middle; width:20px;}
+input.caleditarn {color:#000000; font-family:arial; font-size:xx-small; text-align:center; horizontal-align:middle; width:20px;}
+input.caleditaro {color:#000000; font-family:arial; font-size:xx-small; text-align:center; horizontal-align:middle; width:20px;}
+input.caleditaro2 {color:#F00; font-family:arial; font-size:xx-small; text-align:center; horizontal-align:middle; width:20px;}
+input.calediactu {horizontal-align:middle;}
+input.calgenactu {horizontal-align:middle;}
+input.calediasig2 {color:#000000; font-family:arial; font-size:xx-small; text-align:center; horizontal-align:middle; width:10px;}
