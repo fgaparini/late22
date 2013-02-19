@@ -5,6 +5,15 @@
     </div>
 </div> 
 
+<?php $id_habitacion=$_GET['id_habitacion']; 
+
+echo "<script>
+    var id_habitacion = ".$id_habitacion.";
+</script>"
+?>
+
+
+
 <div class="row-fluid">
 
     <div class="span12">
@@ -22,6 +31,7 @@
             //Encabezado calendario
             include("application/views/admin/calendario/conexion.inc");
             include("application/views/admin/calendario/lecparam.inc");
+            include("application/views/admin/calendario/fungen.inc");
             include("application/views/admin/calendario/actualiz.inc");
             include("application/views/admin/calendario/caldacab.inc");
 

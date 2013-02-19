@@ -83,20 +83,14 @@ class Pruebas extends CI_Controller
 
     function prueba2()
     {
-        $list = array(
-            [0] => 'alojamiento tanto',
-            [1] => array(
-                [0] => 'hab1',
-                [1] => 'ha2',
-                [2] => array(
-                    [0] => '0101010',
-                    [1] => '020202',
-                    [2] => '030303'
-                )
-            )
-        );
-
-        echo $list[0][2][2];
+       $array = array('uno','dos','tres','cuatro','cinco','seis','siete','ocho');
+       
+       foreach($array as $var)
+       {
+           echo count($array)." ";
+          
+       }
+       
     }
 
     function mostra()

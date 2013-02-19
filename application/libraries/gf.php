@@ -9,8 +9,16 @@ class Gf
             return "";
     }
     
-    
-
+    function eliminar_coma($string)
+    {
+        $array_comas='';
+        if($string!='')
+        $array_comas = substr($string, 0, strlen($string) - 1);
+        else
+        $array_comas='';
+        
+        return $array_comas;
+    }
     
     function cantidad_dias($fecha_desde,$fecha_hasta)
     {
