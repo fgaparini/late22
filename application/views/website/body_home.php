@@ -28,10 +28,10 @@ BEGUIN CONTENIDOS
                         <?php foreach ($row1 as $var): ?>
                                                     
                                 <div>
-                                    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1.jpg" ?>" alt="">
+                                    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1.jpg" ?>" alt="Hotel <?php echo ucwords($var['Nombre']); ?> San Rafael">
                                     <h2><?php echo ucwords($var['Nombre']); ?></h2>
                                     <p><?php echo substr($var['Descripcion'],0,100) ?> </p>
-                                    <span class="button"><a href="<?php echo base_url().$var['Url'] ?>">+ INFO</a> </span>
+                                    <span class="button"><a href="<?php echo base_url().$var['Url'] ?>" title="Hotel <?php echo ucwords($var['Nombre']); ?>- San Rafael - Ver Ficha Informacion">+ INFO</a> </span>
                                 </div>
                        
                           <?php endforeach ?>
@@ -44,11 +44,11 @@ BEGUIN CONTENIDOS
                             
                       
                                 <div>
-                                    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1.jpg" ?>" alt="">
+                                    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1.jpg" ?>" alt="Cabañas <?php echo ucwords($var['Nombre']); ?> San Rafael">
                                     <h2><?php echo ucwords($var['Nombre']); ?></h2>
                                     <p><?php echo substr($var['Descripcion'],0,100) ?> </p>
-                                    <span class="button"><a href="<?php echo base_url().$var['Url'] ?>">+ INFO</a> </span>
-                                </div>
+                                    <span class="button"><a href="<?php echo base_url().$var['Url'] ?>" title="Cabañas <?php echo ucwords($var['Nombre']); ?>- San Rafael - Ver Ficha Informacion">+ INFO</a> </span>
+                               </div>
                        
                           <?php endforeach ?>
                     </div>
@@ -58,10 +58,11 @@ BEGUIN CONTENIDOS
                         <?php foreach ($row3 as $var): ?>
                           
                                 <div>
-                                    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1.jpg" ?>" alt="">
+                                    <img src="<?php echo base_url() . "upload/alojamientos/thumb/" . $var['ID_Alojamiento'] . "_1.jpg" ?>" alt="Chalet <?php echo ucwords($var['Nombre']); ?> San Rafael">
                                     <h2><?php echo ucwords($var['Nombre']); ?></h2>
-                                    <p><?php echo substr($var['Descripcion'],0, 100) ?> </p>
-                                    <span class="button"><a href="#">+ INFO</a> </span>
+                                    <p><?php echo substr($var['Descripcion'],0,100) ?> </p>
+                                    <span class="button"><a href="<?php echo base_url().$var['Url'] ?>" title="Chalet <?php echo ucwords($var['Nombre']); ?>- San Rafael - Ver Ficha Informacion">+ INFO</a> </span>
+                             
                                 </div>
                      
                         <?php endforeach ?>
@@ -74,10 +75,10 @@ BEGUIN CONTENIDOS
                           <?php foreach ($row4 as $var): ?>
                           
                                 <div>
-                                    <img src="<?php echo base_url() . "upload/empresas/thumb/" . $var['ID_Empresa'] . "_1.jpg" ?>" alt="">
+                                    <img src="<?php echo base_url() . "upload/empresas/thumb/" . $var['ID_Empresa'] . "_1.jpg" ?>" alt="<?php echo ucwords($var['Empresa']); ?> - Excursiones">
                                     <h2><?php echo ucwords($var['Empresa']); ?></h2>
                                     <p><?php echo substr($var['Descripcion'],0, 100) ?> </p>
-                                    <span class="button"><a href="<?php echo base_url() .$var['Url'] ; ?>">+ INFO</a> </span>
+                                    <span class="button"><a href="<?php echo base_url() .$var['Url'] ; ?>" Title="<?php echo ucwords($var['Empresa']); ?> San Rafael - Ficha Información">+ INFO</a> </span>
                                 </div>
                      
                         <?php endforeach ?>
@@ -96,8 +97,8 @@ BEGUIN CONTENIDOS
                 <div>
 
                     <div class="imag"><img src="<?php echo base_url() . "upload/paginas/thumb/" . $var['ID_Pagina'] . "_1p.jpg" ?>" alt=""> </div>
-                    <h3><?php echo ucwords($var['TituloContenido']); ?></h3>
-                    <p><?php echo substr(strip_tags($var['Contenido']),0, 200) ?> </p>
+                    <h3><a href="<?php echo base_url() .$var['Url'] ; ?>" title="<?php echo ucwords($var['TituloContenido']); ?> - San Rafael - Ver Info completa"><?php echo ucwords($var['TituloContenido']); ?></a></h3>
+                    <p><?php echo substr(strip_tags($var['Contenido']),0, 200) ?>... <a href="<?php echo base_url() .$var['Url'] ; ?>" title="<?php echo ucwords($var['TituloContenido']); ?> - San Rafael - Ver Info completa">Seguir Leyendo</a>
                 </div>
                   <?php endforeach ?>
             </div>

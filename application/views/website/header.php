@@ -15,9 +15,9 @@
 
 
 
-<!-- JQUERY CSS-->
+<!-- JQUERY CSS
 
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />-->
 <!-- offline-->
   <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery-ui-1.9.2.custom.css" />
 
@@ -27,8 +27,8 @@
 <style type="text/css">#videogallery a#videolb{display:none}</style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>js/engine/css/overlay-minimal.css"/>
 
-<!--        -------- START CSS STYLE ---------       -->
-<link href="<?php echo base_url() ?>css/normalize.min.css" rel="stylesheet">
+<!--        -------- START CSS STYLE ---------      -->
+<link href="<?php echo base_url() ?>css/normalize.min.css" rel="stylesheet"> 
 <link href="<?php echo base_url() ?>css/estilos.css" rel="stylesheet">
 <link href="<?php echo base_url() ?>css/responsive.css" rel="stylesheet">
     
@@ -40,13 +40,13 @@
   <body>
  
 <div align="center" id="general"> 
-<div class="nofixed"> <div id="menu2">
-  <div align="left">
-    <ul>
+<div class="nofixed" align="center"> <div id="menu2" align="center">
+  <div align="center">
+    <ul align="left">
      <img src="<?php echo base_url() ?>logo_nuevo.jpg" width="270px" height="110px" alt="SAN RAFAEL LATE" Title="San Rafael Late - Portal de Turismo de San Rafael">
       <li class="menuss"><span class="title">Descubrenos</span><br><span class="info">Toda la informacion sobre San Rafael</span>
 <!-- ########## SUBMENU DESCUBRELA ######## -->
-<div class="submenu">
+<div class="submenu" align="left">
 <div><img src="<?php echo base_url() ?>imagenes/CTC.jpg" alt="" class=""></div>
 <!-- SAN RAFAEL INFO -->
 <div><ul class="">
@@ -110,7 +110,7 @@
       </li>
       <li class="menuss" id="preptuviaje"><span class="title">Prepara Tu Viaje</span><br><span class="info">Todo lo que necesitas para armar tu Viaje a San Rafael </span>
 <!-- ##########SUBMENU PREPARA TU VIAJE ######## -->
-<div class="submenu" >
+<div class="submenu" align="left" >
 <!-- ALOJAMIENTOS --> 
 <div id="alojamiento" class="border_rigth">
  
@@ -159,7 +159,7 @@
 <!-- ##########SUBMENU FIN PREPARA ######## -->
       </li>
       <li class="menuss"><span class="title">Circuitos</span><br><span class="info">Conoce los circuitos turistico de San Rafael </span>
-<div class="submenu">
+<div class="submenu" align="left">
   <div id="circuitos">
     <div>
       <img src="<?php echo base_url() ?>imagenes/valleGrande.jpg" alt="Valle Grande San Rafael">
@@ -200,7 +200,7 @@
       <li class="menuss"><span class="title">Que Hacer?</span><br><span class="info">
       Turismo Aventura, Vino y Bodegas, Olivos..Disfruta! </span>
 
-<div class="submenu">
+<div class="submenu" align="left">
 <!-- turismo aventura--> 
 <div id="tAventura" class="border_rigth">
  
