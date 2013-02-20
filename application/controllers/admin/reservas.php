@@ -113,27 +113,37 @@ class Reservas extends CI_Controller {
 
     function buscar_disponibilidad_ii() {
 
-        $checkin = $this->input->post('checkin');
-        $checkout = $this->input->post('checkout');
-        $id_alojamiento = $this->input->post('id_alojamiento');
-        $cantidad_dias = $this->input->post('cant_dias');
+
         $cantidad_habitaciones = $this->input->post('cant_habitaciones');
 
-
-        echo "checkin: " . $checkin . "<br>";
-        echo "checkout: " . $checkout . "<br>";
-        echo "id_alojamiento: " . $id_alojamiento . "<br>";
-        echo "cantidad_dias: " . $cantidad_dias . "<br>";
-        echo "cantidad_habitaciones: " . $cantidad_habitaciones . "<br>";
-
         for ($i = 1; $i <= $cantidad_habitaciones; $i++) {
-            $id_habitacion = $this->input->post('id_habitacion_' . $i);
-            $cant_por_hab = $this->input->post('cantidad_por_habitacion_' . $i);
-            $precio_hab = $this->input->post('precio_habitacion_' . $i);
-            echo "id_habitacion: " . $id_habitacion . "<br>";
-            echo "cantidad_por_habitacion: " . $cant_por_hab . "<br>";
-            echo "precio habitacion: " . $precio_hab . "<br>";
+            $nombre_hab[$i]=$this->input->post('nombre_hab_'. $i);
+            $id_habitacion[$i] = $this->input->post('id_habitacion_' . $i);
+            $cant_por_hab[$i] = $this->input->post('cantidad_por_habitacion_' . $i);
+            $precio_hab[$i] = $this->input->post('precio_habitacion_' . $i);
         }
+        
+        //Arrays varios valores de habitaciones
+        $data['nombre_hab']=$nombre_hab;
+        $data['id_habitacion']=$id_habitacion;
+        $data['cant_por_hab']=$cant_por_hab;
+        $data['precio_hab']=$precio_hab;
+        
+        //Info alojamiento
+        $data['descripcion']=$this->input->post('descripcion');
+        $data['direccion'] = $this->input->post('direccion');
+        $data['tipoalojamiento'] = $this->input->post('tipo_alojamiento');
+        $data['localidad']= $this->input->post('localidad');
+        $data['checkin'] = $this->gf->html_mysql($this->input->post('checkin'));
+        $data['checkout'] = $this->gf->html_mysql($this->input->post('checkout'));
+        $data['id_alojamiento'] = $this->input->post('id_alojamiento');
+        $data['nombre_alojamiento'] = $this->input->post('nombre_alojamiento');
+        $data['cantidad_dias'] = $this->input->post('cant_dias');
+        $data['cantidad_habitaciones'] = $cantidad_habitaciones;
+        $data['title'] = "Reservar paso 2";
+        $data['view'] ='admin/reservas/reservas_alojamientos_ii';
+        $this->load->view('admin/templates/temp_menu', $data);
+        
     }
 
     //Arma el array que luego se mostrar en la vista
@@ -162,6 +172,7 @@ class Reservas extends CI_Controller {
                 $provincia = $var['SuName'];
                 $ciudad = $var['Name'];
                 $localidad = $var['Localidad'];
+                $direccion = $var['Direccion'];
                 //habitaciones
                 $id_habitacion = $var['ID_Habitacion'];
                 $nombrehab = $var['NombreHab'];
@@ -192,7 +203,8 @@ class Reservas extends CI_Controller {
                         'localidad' => $localidad,
                         'habitacion' => $habitaciones,
                         'fecha_desde' => $fecha_desde,
-                        'fecha_hasta' => $fecha_hasta
+                        'fecha_hasta' => $fecha_hasta,
+                        'direccion'  => $direccion
                     );
                     array_unshift($final_total, $final);
                     //Se resetean de nuevo las variables para volver a comenzar

@@ -1,6 +1,14 @@
 <div class="row-fluid">
     <div class="span12">
         <h3>Habitaciones disponibles</h3>
+        <hr>
+        <div class="row-fluid">
+            <div class="spa12">
+                <button class="btn btn-large btn btn btn-inverse" type="button">Paso 1</button>
+                <button class="btn btn-large btn btn-warning disabled" type="button">Paso 2</button>
+                <button class="btn btn-large btn btn-warning disabled" type="button">Paso 3</button>
+            </div>
+        </div>
         <?php $min_dispo = 999; ?>
 <!-- ###################################### foreach con informacion del alojamiento ################################# -->
         <?php foreach ($alojamientos_array as $key_alo => $info_alo): ?>
@@ -13,7 +21,7 @@
                             <h2></h2>  
                             <div class="row-fluid">
                                 <div class="span3">
-                                    <span><b>Tipo:&nbsp;</b><?php echo $info_alo['tipoalojamiento'] ?></span>  
+                                    <span><b>Tipo:&nbsp;</b><?php echo $info_alo['tipoalojamiento'] ?></span> 
                                 </div>
                                 <div class="span3">
                                     <span><b>Ubicación:&nbsp;</b><?php echo $info_alo['localidad'] ?></span>  
@@ -47,7 +55,8 @@
                             <div class="row-fluid">
                             <div class="span11 offset1">
                                 <b><?php echo $info_hab['nombrehab'] ?></b>
-                                <input type="text" name="<?php echo "id_habitacion"."_".$count_habitaciones ?>" value="<?php echo $info_hab['id_habitacion'] ?>">
+                                <input type="hidden" name="<?php echo "id_habitacion"."_".$count_habitaciones ?>" value="<?php echo $info_hab['id_habitacion'] ?>">
+                                <input type="hidden" name="<?php echo "nombre_hab"."_".$count_habitaciones ?>" value="<?php echo $info_hab['nombrehab'] ?>">
                             </div>
                         </div>
                         <div class="row-fluid">
@@ -106,7 +115,7 @@
                                             
                                             ?>
                                             <b><label id="label_precio_<?php echo $info_hab['id_habitacion'] ?>"  ><?php echo $precio_final ?></label></b>
-                                            <input type="text" value="<?php echo $precio_final ?>" name="precio_habitacion_<?php echo $count_habitaciones  ?>">
+                                            <input type="hidden" value="<?php echo $precio_final ?>" name="precio_habitacion_<?php echo $count_habitaciones  ?>">
                                         </td>
                                     </tr>
 
@@ -123,97 +132,18 @@
                 </div>
                 
                 </div>
-                <input type="text" name="cant_habitaciones" value="<?php echo count($info_alo['habitacion']) ?>">
-                <input type="text" name="id_alojamiento" value="<?php echo $info_alo['id_alojamiento']  ?>">
-                <input type="text" name="checkin" value="<?php echo  $info_alo['fecha_desde']   ?>">
-                <input type="text" name="checkout" value="<?php echo $info_alo['fecha_hasta']   ?>">
-                <input type="text" name="cant_dias" value="<?php echo count($info_hab['fechas']) ?>"> 
+                <input type="hidden" name="cant_habitaciones" value="<?php echo count($info_alo['habitacion']) ?>">
+                <input type="hidden" name="id_alojamiento" value="<?php echo $info_alo['id_alojamiento']  ?>">
+                <input type="hidden" name="nombre_alojamiento" value="<?php echo $info_alo['nombre']  ?>">
+                <input type="hidden" name="direccion" value="<?php echo $info_alo['direccion']  ?>">
+                <input type="hidden" name="checkin" value="<?php echo  $info_alo['fecha_desde']   ?>">
+                <input type="hidden" name="checkout" value="<?php echo $info_alo['fecha_hasta']   ?>">
+                <input type="hidden" name="cant_dias" value="<?php echo count($info_hab['fechas']) ?>"> 
+                <input type="hidden" name="descripcion" value="<?php echo $info_alo['descripcion']  ?>">
+                <input type="hidden" name="tipo_alojamiento" value="<?php echo $info_alo['tipoalojamiento'] ?>" >
+                <input type="hidden" name="localidad" value="<?php echo $info_alo['localidad'] ?>">
             </form>
 
 <?php endforeach; ?>
     </div>
 </div>
-
-
-
-<!-- ###################################### aparte ################################# -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row-fluid">
-    <div class="span12">
-        <h2>Habitaciones disponibles</h2>
-        <hr>
-<?php foreach ($alojamientos_array as $key_alo => $info_alo): ?>
-            <div class="row-fluid" style="background-color: #00b3ee">
-                <b>Nombre:&nbsp;</b><?php echo $info_alo['nombre'] ?><br>
-                <b>Descripción:&nbsp;</b><?php echo $info_alo['descripcion'] ?><br>
-                <b>Tipo:&nbsp;</b><?php echo $info_alo['tipoalojamiento'] ?><br>
-                <b>Lugar:&nbsp;</b><?php echo $info_alo['pais'] . " > " . $info_alo['provincia'] . " > " . $info_alo['ciudad'] . " > " . $info_alo['localidad'] ?> <br>       
-            <?php foreach ($info_alo['habitacion'] as $key_hab => $info_hab): ?>
-                    <div class=" offset1 span10" style="background-color: #2b81af">
-                        <b>Habitación:&nbsp;</b><?php echo $info_hab['nombrehab'] ?><br>
-                        <b>Calendario:</b><br>
-                        <div style="background-color: #57a957" class="offset1 span8">
-                    <?php
-                    foreach ($info_hab['fechas'] as $key_fe => $info_fe):
-                        //pasar fecha
-                        $array_f = explode('-', $info_fe['fecha']);
-                        $fecha_chica = $array_f[2] . "/" . $array_f[1];
-                        //fijarse si es oferta o no
-
-                        if ($info_fe['tarifa_oferta'] > 0)
-                            $precio = $info_fe['tarifa_oferta'] . "*";
-                        else
-                            $precio = $info_fe['tarifa_normal'];
-
-                        if ($info_fe['cant_disponible'] == '0') {
-                            echo "[" . $fecha_chica . "($" . $precio . ")-<b>" . $info_fe['cant_disponible'] . "</b>]";
-                        } else {
-                            echo "[" . $fecha_chica . "($" . $precio . ")-" . $info_fe['cant_disponible'] . "]";
-                        }
-
-                        echo $info_fe['min_disponible'];
-                        ?>
-
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                        <?php endforeach; ?>
-            </div>     
-            <br>
-                    <?php endforeach; ?>
-    </div>
-</div>
-

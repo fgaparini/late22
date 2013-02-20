@@ -135,6 +135,7 @@ class Reservas_model extends CI_Model
             a.ID_Alojamiento,
             i.Nombre,
             i.Descripcion,
+            i.Direccion,
             ta.TipoAlojamiento,
             p.CountryName,
             pr.SuName,
