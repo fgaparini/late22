@@ -92,6 +92,39 @@
         </div>
         <div class="row-fluid">
             <div class="span12">
+                <h4>Métodos de pago</h4>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <label class="checkbox">
+                            <input type="checkbox" <?php echo $this->gf->comparar_general(1,$Anticipado,'checked') ?>   value="">
+                            Anticipado
+                        </label>
+                    </div>
+                    <div class="span4">
+                        <label class="checkbox">
+                            <input <?php echo $this->gf->comparar_general(1,$AceptaSenia,'checked') ?> type="checkbox" value="">
+                            Seña
+                        </label>
+                    </div>
+                    <div class="span4">
+                        <label class="checkbox">
+                            <input type="checkbox" value="">
+                            Garantia targeta
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <h4>Pago</h4>
+                <div class="row-fluid">
+                    <div class="offset1 span11">
+                       <p> <label>Total a pagar:</label><input type="text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
                 <h4>Datos personales</h4>
                 <div class="row-fluid">
                     <p>Rellena el siguiente formulario con tus datos, estos seran utilizados para realizar la reserva. </p>
@@ -159,7 +192,7 @@
                 </label>
                 <label class="checkbox">
                     <input type="checkbox" value="">
-                     Enviar email Alojamiento
+                    Enviar email Alojamiento
                 </label>
             </div>
         </div>

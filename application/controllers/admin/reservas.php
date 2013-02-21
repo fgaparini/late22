@@ -115,6 +115,7 @@ class Reservas extends CI_Controller {
 
 
         $cantidad_habitaciones = $this->input->post('cant_habitaciones');
+        $id_alojamiento=$this->input->post('id_alojamiento');
 
         for ($i = 1; $i <= $cantidad_habitaciones; $i++) {
             $nombre_hab[$i]=$this->input->post('nombre_hab_'. $i);
@@ -122,12 +123,21 @@ class Reservas extends CI_Controller {
             $cant_por_hab[$i] = $this->input->post('cantidad_por_habitacion_' . $i);
             $precio_hab[$i] = $this->input->post('precio_habitacion_' . $i);
         }
-        
         //Arrays varios valores de habitaciones
         $data['nombre_hab']=$nombre_hab;
         $data['id_habitacion']=$id_habitacion;
         $data['cant_por_hab']=$cant_por_hab;
         $data['precio_hab']=$precio_hab;
+        
+        //Metodos de pago
+        //Buscar acepta senia, anticipado
+        $MP = $this->reservas_model->select_mp_alo($id_alojamiento);
+        $data['Senia']=$MP->Senia;
+        $data['Anticipado']=$MP->Anticipado;
+        $data['ComisionSenia']=$MP->ComisionSenia;
+        $data['AceptaSenia']=$MP->AceptaSenia;
+        $data['Comision']=$MP->Comision;
+        $data['MejorPrecio']=$MP->MejorPrecio;
         
         //Info alojamiento
         $data['descripcion']=$this->input->post('descripcion');

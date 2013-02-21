@@ -202,6 +202,28 @@ class Reservas_model extends CI_Model
         //$rows = $rows->result_array();
         return $rows;
     }
+    
+    function select_mp_alo($id_alojamiento)
+    {
+        $query=  sprintf("
+            select Senia,
+            Anticipado,
+            ComisionSenia,
+            AceptaSenia,
+            Comision,
+            MejorPrecio 
+            from 
+            alojamientos as a 
+            inner join 
+            metododepago as m 
+            on 
+            a.ID_MP=m.ID_MP
+            where ID_Alojamiento=%s",$id_alojamiento);
+        
+        $row = $this->db->query($query);
+        $row = $row->row();
+        return $row;
+    }
 
 }
 
