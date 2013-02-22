@@ -83,119 +83,187 @@
                             </tr>
                         <?php endfor ?>
                         <tr>
-                            <td>Total estadía</td>
+                            <td>Total estadía </td>
                             <td colspan="4">$<?php echo $total ?></td>
+
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <h4>Métodos de pago</h4>
-                <div class="row-fluid">
+        <form metod="post" action="<?php echo base_url() ?>admin/buscar_disponibilidad_iii/">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h4>Métodos de pago</h4>
+                    <div class="row-fluid">
+                        <?php if ($Anticipado): ?>
+                            <div class="span4">
+                                <label class="checkbox">
+                                    <input onclick="js_metodo('anticipado')"  type="radio" name="metodo"  value="aticipado">
+                                    Anticipado
+                                </label>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($AceptaSenia): ?>
+                            <div class="span4">
+                                <label class="checkbox">
+                                    <input onclick="js_metodo('senia')" name="metodo" type="radio" value="senia">
+                                    Seña
+                                </label>
+                            </div>
+                        <?php endif ?>
+                        <div class="span4">
+                            <label class="checkbox">
+                                <input onclick="js_metodo('garantia')" name="metodo" type="radio"  value="garantia">
+                                Garantia targeta
+                            </label>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div id="metod_div" style="display: none" class="row-fluid">
+                    <h4>Pago</h4>
+                    <div class="row-fluid">
+                        <div class="offset1 span4">
+                            <label><b>Total a pagar:</b></label><label id="total_pagar"></label>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="offset1 span4">
+                            <label><b>Metodo de pago:</b></label>
+                            <select name="metodo_pago">
+                                <option value="banco">Banco (depósito, transferencia)</option>
+                                <option value="tarjeta">Targeta online</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="garantia_div" style="display: none" class="row-fluid">
                     <div class="span4">
-                        <label class="checkbox">
-                            <input type="checkbox" <?php echo $this->gf->comparar_general(1,$Anticipado,'checked') ?>   value="">
-                            Anticipado
-                        </label>
+                        <div class="row-fluid">
+                            <div class="control-group">
+                                <label class="control-label" >Tipo tarjeta</label>
+                                <div class="controls">
+                                    <select name="tarjeta_tipo" >
+                                        <option value="visa">Visa</option>
+                                        <option value="american">American Express</option>
+                                        <option value="master">Masterd CARD</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="control-group">
+                                <label class="control-label" >Titular tarjeta</label>
+                                <div class="controls">
+                                    <input name="tarjeta_titular" type="text" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="control-group">
+                                <label class="control-label" >N° Tarjeta</label>
+                                <div class="controls">
+                                    <input name="tarjeta_numero" type="text" >
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="span4">
-                        <label class="checkbox">
-                            <input <?php echo $this->gf->comparar_general(1,$AceptaSenia,'checked') ?> type="checkbox" value="">
-                            Seña
-                        </label>
-                    </div>
-                    <div class="span4">
-                        <label class="checkbox">
-                            <input type="checkbox" value="">
-                            Garantia targeta
-                        </label>
+                        <div class="row-fluid">
+                            <div class="control-group">
+                                <label class="control-label" >Fecha vencimiento</label>
+                                <div class="controls">
+                                    <input name="tarjeta_vencimiento" type="text" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="control-group">
+                                <label class="control-label" >Código seguridad</label>
+                                <div class="controls">
+                                    <input name="tarjeta_codigo" type="text" >
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row-fluid">
-                <h4>Pago</h4>
-                <div class="row-fluid">
-                    <div class="offset1 span11">
-                       <p> <label>Total a pagar:</label><input type="text"></p>
+                <div class="span12">
+                    <h4>Datos personales</h4>
+                    <div class="row-fluid">
+                        <p>Rellena el siguiente formulario con tus datos, estos seran utilizados para realizar la reserva. </p>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <h4>Datos personales</h4>
-                <div class="row-fluid">
-                    <p>Rellena el siguiente formulario con tus datos, estos seran utilizados para realizar la reserva. </p>
-                </div>
-                <div class="row-fluid">
-                    <div class="span4">
-                        <div class="control-group">
-                            <label class="control-label">Nombre</label>
-                            <div class="controls">
-                                <input type="text" >
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">Nombre</label>
+                                <div class="controls">
+                                    <input name="huesped_nombre" type="text" >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Correo Electrónico(donde llega el vaucher)</label>
+                                <div class="controls">
+                                    <input name="huesped_correo" type="text" >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Ciudad</label>
+                                <div class="controls">
+                                    <input name="huesped_ciudad" type="text" >
+                                </div>
                             </div>
                         </div>
-                        <div class="control-group">
-                            <label class="control-label">Correo Electrónico(donde llega el vaucher)</label>
-                            <div class="controls">
-                                <input type="text" >
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">Apellido</label>
+                                <div class="controls">
+                                    <input name="huesped_apellido" type="text" >
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">Ciudad</label>
-                            <div class="controls">
-                                <input type="text" >
+                            <div class="control-group">
+                                <label class="control-label">Telefono y/o celular (con código de area)</label>
+                                <div class="controls">
+                                    <input name="huesped_telefono" type="text" >
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="span4">
-                        <div class="control-group">
-                            <label class="control-label">Apellido</label>
-                            <div class="controls">
-                                <input type="text" >
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">Telefono y/o celular (con código de area)</label>
-                            <div class="controls">
-                                <input type="text" >
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">Provincia</label>
-                            <div class="controls">
-                                <input type="text" >
+                            <div class="control-group">
+                                <label class="control-label">Provincia</label>
+                                <div class="controls">
+                                    <input name="huesped_provincia" type="text" >
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12">
-                        <div class="control-group">
-                            <label class="control-label">Observaciones</label>
-                            <div class="controls">
-                                <textarea class="span7"></textarea>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Observaciones</label>
+                                <div class="controls">
+                                    <textarea name="hueped_observaciones" class="span7"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row-fluid">
-            <h4>Verificar opciones de envio</h4>
-            <div class="spa12">
-                <label class="checkbox">
-                    <input type="checkbox" value="">
-                    Enviar email Huesped 
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" value="">
-                    Enviar email Alojamiento
-                </label>
+            <div class="row-fluid">
+                <h4>Verificar opciones de envio</h4>
+                <div class="spa12">
+                    <label class="checkbox">
+                        <input name="envio_huesped" type="checkbox" value="1">
+                        Enviar email Huesped 
+                    </label>
+                    <label class="checkbox">
+                        <input name="envio_alojamiento" type="checkbox" value="1">
+                        Enviar email Alojamiento
+                    </label>
+                </div>
             </div>
-        </div>
-
+            <input type="hidden" name="senia_total" id="total_senia" value="<?php echo $senia_total ?>" >
+            <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
+        </form>
     </div>
 </div>

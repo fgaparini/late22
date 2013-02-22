@@ -59,8 +59,6 @@ class Pruebas extends CI_Controller {
                     $habitaciones = array();
                 }
             }
-
-
             $id_alojamiento = $var['a'];
             $id_habitacion = $var['b'];
         }

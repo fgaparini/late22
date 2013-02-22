@@ -115,35 +115,42 @@ class Reservas extends CI_Controller {
 
 
         $cantidad_habitaciones = $this->input->post('cant_habitaciones');
-        $id_alojamiento=$this->input->post('id_alojamiento');
+        $id_alojamiento = $this->input->post('id_alojamiento');
 
+        $subtotal = 0;
+        $total = 0;
         for ($i = 1; $i <= $cantidad_habitaciones; $i++) {
-            $nombre_hab[$i]=$this->input->post('nombre_hab_'. $i);
+            $nombre_hab[$i] = $this->input->post('nombre_hab_' . $i);
             $id_habitacion[$i] = $this->input->post('id_habitacion_' . $i);
             $cant_por_hab[$i] = $this->input->post('cantidad_por_habitacion_' . $i);
             $precio_hab[$i] = $this->input->post('precio_habitacion_' . $i);
+            $subtotal = $cant_por_hab[$i] * $precio_hab[$i];
+            $total = $subtotal + $total;
         }
+
         //Arrays varios valores de habitaciones
-        $data['nombre_hab']=$nombre_hab;
-        $data['id_habitacion']=$id_habitacion;
-        $data['cant_por_hab']=$cant_por_hab;
-        $data['precio_hab']=$precio_hab;
-        
+        $data['nombre_hab'] = $nombre_hab;
+        $data['id_habitacion'] = $id_habitacion;
+        $data['cant_por_hab'] = $cant_por_hab;
+        $data['precio_hab'] = $precio_hab;
+
         //Metodos de pago
         //Buscar acepta senia, anticipado
         $MP = $this->reservas_model->select_mp_alo($id_alojamiento);
-        $data['Senia']=$MP->Senia;
-        $data['Anticipado']=$MP->Anticipado;
-        $data['ComisionSenia']=$MP->ComisionSenia;
-        $data['AceptaSenia']=$MP->AceptaSenia;
-        $data['Comision']=$MP->Comision;
-        $data['MejorPrecio']=$MP->MejorPrecio;
-        
+        $senia = $MP->Senia;
+        $senia = ($senia * $total) / 100;
+        $data['Senia'] = $MP->Senia;
+        $data['senia_total'] = $senia;
+        $data['Anticipado'] = $MP->Anticipado;
+        $data['ComisionSenia'] = $MP->ComisionSenia;
+        $data['AceptaSenia'] = $MP->AceptaSenia;
+        $data['Comision'] = $MP->Comision;
+        $data['MejorPrecio'] = $MP->MejorPrecio;
         //Info alojamiento
-        $data['descripcion']=$this->input->post('descripcion');
+        $data['descripcion'] = $this->input->post('descripcion');
         $data['direccion'] = $this->input->post('direccion');
         $data['tipoalojamiento'] = $this->input->post('tipo_alojamiento');
-        $data['localidad']= $this->input->post('localidad');
+        $data['localidad'] = $this->input->post('localidad');
         $data['checkin'] = $this->gf->html_mysql($this->input->post('checkin'));
         $data['checkout'] = $this->gf->html_mysql($this->input->post('checkout'));
         $data['id_alojamiento'] = $this->input->post('id_alojamiento');
@@ -151,9 +158,31 @@ class Reservas extends CI_Controller {
         $data['cantidad_dias'] = $this->input->post('cant_dias');
         $data['cantidad_habitaciones'] = $cantidad_habitaciones;
         $data['title'] = "Reservar paso 2";
-        $data['view'] ='admin/reservas/reservas_alojamientos_ii';
+        $data['js'] = array('js/admin/reservas_alojamientos_ii');
+        $data['view'] = 'admin/reservas/reservas_alojamientos_ii';
         $this->load->view('admin/templates/temp_menu', $data);
-        
+    }
+
+    function buscar_disponibilidad_iii() {
+
+        echo "Como pagar : " . $this->input->post('metodo') . "<br>";
+        echo "forma de pago : " . $this->input->post('metodo_pago') . "<br>";
+        echo "tipo tarjeta : " . $this->input->post('tarjeta_tipo') . "<br>";
+        echo "metodo de pago : " . $this->input->post('tarjeta_titular') . "<br>";
+        echo "tarjeta numero : " . $this->input->post('tarjeta_numero') . "<br>";
+        echo "tarjeta vencimiento : " . $this->input->post('tarjeta_vencimiento') . "<br>";
+        echo "tarjeta codigo : " . $this->input->post('tarjeta_codigo') . "<br>";
+        echo "huesped nombre : " . $this->input->post('huesped_nombre') . "<br>";
+        echo "huesped correo : " . $this->input->post('huesped_correo') . "<br>";
+        echo "huesped ciudad : " . $this->input->post('huesped_ciudad') . "<br>";
+        echo "huesped apellido : " . $this->input->post('huesped_apellido') . "<br>";
+        echo "huesped telefono : " . $this->input->post('huesped_telefono') . "<br>";
+        echo "huesped provincia : " . $this->input->post('huesped_provincia') . "<br>";
+        echo "huesped observaciones : " . $this->input->post('hueped_observaciones') . "<br>";
+        echo "mail huesped : " . $this->input->post('envio_huesped') . "<br>";
+        echo "envio alojamiento : " . $this->input->post('envio_alojamiento') . "<br>";
+        echo "senia total : " . $this->input->post('senia_total') . "<br>";
+        echo "senia total : " . $this->input->post('total') . "<br>";
     }
 
     //Arma el array que luego se mostrar en la vista
@@ -214,7 +243,7 @@ class Reservas extends CI_Controller {
                         'habitacion' => $habitaciones,
                         'fecha_desde' => $fecha_desde,
                         'fecha_hasta' => $fecha_hasta,
-                        'direccion'  => $direccion
+                        'direccion' => $direccion
                     );
                     array_unshift($final_total, $final);
                     //Se resetean de nuevo las variables para volver a comenzar
