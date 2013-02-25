@@ -13,13 +13,7 @@ $(function() {
                 selectedDate, instance.settings );
             dates.not( this ).datepicker( "option", option, date  );
         }
-    });
-    
-    
-
-      
-    
-    
+    });  
     
 });
 
@@ -40,9 +34,7 @@ $(function() {
             });
                 
         }
-    })
-    
-		
+    })		
 });
 
 

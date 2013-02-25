@@ -104,7 +104,7 @@
                                             </td>
                                         <?php endforeach; ?> 
                                         <td>
-                                            <select id="option_<?php echo $info_hab['id_habitacion']  ?>" onchange="multiplicar_precio('<?php echo $info_hab['id_habitacion'] ?>','<?php echo $precio_final ?>')" name="cantidad_por_habitacion_<?php echo $count_habitaciones ?>" class="input-mini" type="text">
+                                            <select id="option_<?php echo $info_hab['id_habitacion']  ?>" onchange="multiplicar_precio('<?php echo $info_hab['id_habitacion'] ?>','<?php echo $precio_final ?>','<?php echo $info_alo['id_alojamiento'] ?>')" name="cantidad_por_habitacion_<?php echo $count_habitaciones ?>" class="input-mini" type="text">
                                             <?php for ($i = 0; $i <= $min_dispo; $i++): ?>
                                                     <option value="<?php echo $i ?>"><?php echo $i ?></option>
                                             <?php endfor; ?>
@@ -126,7 +126,7 @@
                         </div>
                 <?php endforeach; ?>
                 <div class="offset9">
-                    <input class="btn-primary btn-large btn" type="submit" value="Reservar">
+                    <input class="btn-primary btn-large btn" disabled id="submit<?php echo $info_alo['id_alojamiento']  ?>" type="submit" value="Reservar">
                     <br>
                     <br>
                 </div>

@@ -16,6 +16,7 @@
                 <p>Verifique si son correctos los datos de estadia, y tarifas, selecione el metodo de pago para garantizar la reserva en cas de ser confirmada y complete formulario con sus datos personales y presione reservar, y su reserva quedara confirmada en el Acto! (forma Inmediata.)</p>
             </div>
         </div>
+        <form method="post" action="<?php echo base_url() ?>admin/reservas/buscar_disponibilidad_iii/">
         <div class="row-fluid">
             <div class="span3">
                 <div class="row-fluid">
@@ -84,14 +85,16 @@
                         <?php endfor ?>
                         <tr>
                             <td>Total estadía </td>
-                            <td colspan="4">$<?php echo $total ?></td>
-
+                            <td><label id="total_estadia">$<?php echo $total ?></label></td>
+                            <td>Descuento:</td>
+                            <td><b>%</b> &nbsp;<input type="text" class="input-mini"  id="descuento" value="" name="descuento" /></td>
+                            <td><button class="btn btn-small btn-primary"  onclick="aplicar_descuento()" type="button">Aplicar</button></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <form metod="post" action="<?php echo base_url() ?>admin/buscar_disponibilidad_iii/">
+        
             <div class="row-fluid">
                 <div class="span12">
                     <h4>Métodos de pago</h4>
@@ -156,7 +159,7 @@
                             <div class="control-group">
                                 <label class="control-label" >Titular tarjeta</label>
                                 <div class="controls">
-                                    <input name="tarjeta_titular" type="text" >
+                                    <input id="tarjeta_titular" name="tarjeta_titular" type="text" >
                                 </div>
                             </div>
                         </div>
@@ -164,7 +167,7 @@
                             <div class="control-group">
                                 <label class="control-label" >N° Tarjeta</label>
                                 <div class="controls">
-                                    <input name="tarjeta_numero" type="text" >
+                                    <input id="tarjeta_numero" name="tarjeta_numero" type="text" >
                                 </div>
                             </div>
                         </div>
@@ -174,7 +177,7 @@
                             <div class="control-group">
                                 <label class="control-label" >Fecha vencimiento</label>
                                 <div class="controls">
-                                    <input name="tarjeta_vencimiento" type="text" >
+                                    <input id="tarjeta_vencimiento" name="tarjeta_vencimiento" type="text" >
                                 </div>
                             </div>
                         </div>
@@ -182,7 +185,7 @@
                             <div class="control-group">
                                 <label class="control-label" >Código seguridad</label>
                                 <div class="controls">
-                                    <input name="tarjeta_codigo" type="text" >
+                                    <input id="tarjeta_codigo" name="tarjeta_codigo" type="text" >
                                 </div>
                             </div>
                         </div>
@@ -262,8 +265,22 @@
                     </label>
                 </div>
             </div>
+            <div class="row-fluid">
+                <div class="offset10 span2">
+                    <input value="Siguiente>>" class="btn btn-large btn-primary" type="submit">
+                </div>
+            </div>
             <input type="hidden" name="senia_total" id="total_senia" value="<?php echo $senia_total ?>" >
             <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
+            <input type="hidden" name="cant_hab" value="<?php echo $cant_por_hab ?>">
+            <input type="hidden" name="nombre_hab" value="<?php echo $precio_hab?>">
+            <input type="hidden" name="precio_hab" value="<?php echo $nombre_hab ?>">
+            <input type="hidden" name="nombre_alojamiento" value="<?php echo $nombre_alojamiento ?>">
+            <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipoalojamiento ?>" >
+            <input type="hidden" name="localidad" value="<?php echo $localidad ?>" >
+            <input type="hidden" name="direccion" value="<?php echo  $direccion ?>">
+            <input type="hidden" name="checkin" value="<?php echo  $checkout ?>">
+            <input type="hidden" name="checkout" value="<?php echo $checkout  ?>">
         </form>
     </div>
 </div>

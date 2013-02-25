@@ -7,8 +7,11 @@ class Reservas extends CI_Controller {
 
         $this->load->model('admin/reservas_model');
         $this->load->model('admin/alojamientos_model');
+        $this->load->model('husped_model');
+        $this->load->model('cal_fecha');
         $this->load->library('pagination');
         $this->load->library('gf');
+        
     }
 
     function index() {
@@ -165,6 +168,31 @@ class Reservas extends CI_Controller {
 
     function buscar_disponibilidad_iii() {
 
+        //Datos huesped
+        $NombreHuesped=$this->input->post('huesped_nombre');
+        $ApellidoHuesped=$this->input->post('ApellidoHuesped');
+        $EmailHuesped=$this->input->post('EmailHuesped');
+        $Contrasenia="";
+        $TelefonoFijo=$this->input->post('huesped_telefono');
+        $TelefonoCelular="";
+        $DiasAcumulados="";
+        $Ciudad=$this->input->post('huesped_ciudad');
+        $Provincia=$this->input->post('huesped_provincia');
+        $Observacion=$this->input->post('Observacion');
+        
+        //Datos reservas_Det
+        $CheckIn = $this->input->post('checkin');
+        $CheckOut = $this->input->post('checkout');
+        $rows_fechas=$this->cal_fecha->list_fechas_rango($CheckIn,$CheckOut);
+        $fe_array[];
+        $fe_count=0;
+        foreach($rows_fechas as $var)
+        {
+            $fe_count++;
+            $fe_array[$fe_count]=$var;
+        }
+        
+        
         echo "Como pagar : " . $this->input->post('metodo') . "<br>";
         echo "forma de pago : " . $this->input->post('metodo_pago') . "<br>";
         echo "tipo tarjeta : " . $this->input->post('tarjeta_tipo') . "<br>";
@@ -180,9 +208,45 @@ class Reservas extends CI_Controller {
         echo "huesped provincia : " . $this->input->post('huesped_provincia') . "<br>";
         echo "huesped observaciones : " . $this->input->post('hueped_observaciones') . "<br>";
         echo "mail huesped : " . $this->input->post('envio_huesped') . "<br>";
-        echo "envio alojamiento : " . $this->input->post('envio_alojamiento') . "<br>";
+        echo "mail alojamiento : " . $this->input->post('envio_alojamiento') . "<br>";
         echo "senia total : " . $this->input->post('senia_total') . "<br>";
         echo "senia total : " . $this->input->post('total') . "<br>";
+        
+        echo "cant_hab : " . $this->input->post('cant_hab') . "<br>";
+        echo "nombre_hab : " . $this->input->post('nombre_hab') . "<br>";
+        echo "precio_hab : " . $this->input->post('precio_hab') . "<br>";
+        echo "nombre_alojamiento : " . $this->input->post('nombre_alojamiento') . "<br>";
+        echo "tipo_alojamiento : " . $this->input->post('tipo_alojamiento') . "<br>";
+        echo "localidad : " . $this->input->post('localidad') . "<br>";
+        echo "direccion : " . $this->input->post('direccion') . "<br>";
+        echo "checkin : " . $this->input->post('checkin') . "<br>";
+        echo "checkout : " . $this->input->post('checkout') . "<br>";
+        echo "descuento :" .$this->input->post('descuento')."<br>";
+        
+        $huesped_array = array(
+            'NombreHuesped' => $NombreHuesped,
+            'ApellidoHuesped' => $ApellidoHuesped,
+            'EmailHuesped' => $EmailHuesped,
+            'Contrasenia' => $Contrasenia,
+            'TelefonoFijo' => $TelefonoFijo,
+            'TelefonoCelular' => $TelefonoCelular,
+            'DiasAcumulados' => $DiasAcumulados,
+            'Ciudad' => $Ciudad,
+            'Provincia' => $Provincia,
+            'Observacion' => $Observacion
+        );
+        
+        
+        //Guardo y obtengo el ultimo id de la insercion
+        $ID_Huesped = $this->huesped_model->insert($huesped_array);
+        
+        $reservas_dat=array(
+            
+            
+            
+        );
+        
+        
     }
 
     //Arma el array que luego se mostrar en la vista
