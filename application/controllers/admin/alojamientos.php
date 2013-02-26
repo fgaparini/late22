@@ -83,7 +83,8 @@ class Alojamientos extends CI_Controller
         $data['Nombre'] = & $Nombre;
         $data['Direccion'] = & $Direccion;
         $data['Telefono'] = & $Telefono;
-        $data['Email'] = & $Email;
+        $data['Email'] = &  $Email;
+        $data['WebSite'] = & $WebSite;
         $data['Responsable'] = & $Responsable;
         $data['Descripcion'] = & $Descripcion;
         $data['Coordenadas'] = & $Coordenadas;
@@ -138,6 +139,7 @@ class Alojamientos extends CI_Controller
             $Direccion = $row->Direccion;
             $Telefono = $row->Telefono;
             $Email = $row->Email;
+            $WebSite = $row->WebSite;
             $Responsable = $row->Responsable;
             $Descripcion = $row->Descripcion;
             $Coordenadas = $row->Coordenadas;
@@ -208,12 +210,13 @@ class Alojamientos extends CI_Controller
         $ID_Alojamiento = $this->input->post('ID_Alojamiento');
         $ID_InformacionGeneral = $this->input->post('ID_InformacionGeneral');
         $ID_MP = $this->input->post('ID_MP');
-
+        
         $data_info_gral = array(
             'Nombre' => $this->input->post('Nombre'),
             'Direccion' => $this->input->post('Direccion'),
             'Telefono' => $this->input->post('Telefono'),
             'Email' => $this->input->post('Email'),
+            'WebSite' => $this->input->post('WebSite'),
             'Responsable' => $this->input->post('Responsable'),
             'Descripcion' => $this->input->post('Descripcion'),
             'Coordenadas' => $this->input->post('Coordenadas'),
@@ -1037,6 +1040,8 @@ class Alojamientos extends CI_Controller
 
         redirect('admin/alojamientos/form_view/' . $id_alojamiento . "/?pestania=publicidad");
     }
+    
+    
 
     //###########################################################----Funciones Privadas---------##########################
     private function alojamientos_servicios_array_final($servicios_total = array(), $servicios_alojamiento = array())

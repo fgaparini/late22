@@ -279,7 +279,7 @@
             <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipoalojamiento ?>" >
             <input type="hidden" name="localidad" value="<?php echo $localidad ?>" >
             <input type="hidden" name="direccion" value="<?php echo  $direccion ?>">
-            <input type="hidden" name="checkin" value="<?php echo  $checkout ?>">
+            <input type="hidden" name="checkin" value="<?php echo  $checkin ?>">
             <input type="hidden" name="checkout" value="<?php echo $checkout  ?>">
         </form>
     </div>

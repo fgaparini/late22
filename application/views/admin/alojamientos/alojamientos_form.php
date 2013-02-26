@@ -42,6 +42,11 @@
                     <input type="text" name="Email" value="<?php echo $Email ?>">
                 </div>
                 <br>
+                <label class="control-label" >Website:</label>
+                <div class="controls">
+                    <input type="text" name="WebSite" value="<?php echo $WebSite ?>">
+                </div>
+                <br>
                 <label class="control-label" >Responsable:</label>
                 <div class="controls">
                     <input type="text" name="Responsable" value="<?php echo $Responsable ?>">
@@ -52,12 +57,12 @@
                     <textarea rows="3" name="Descripcion"><?php echo $Descripcion ?></textarea>
                 </div>
                 <br>
-                 <label class="control-label" >Tipo acuerdo:</label>
+                <label class="control-label" >Tipo acuerdo:</label>
                 <div class="controls">
                     <select name="TipoAcuerdo">
-                        <option <?php echo $this->gf->comparar_general('P',$TipoAcuerdo,'selected') ?> value="P">Publicidad</option>
-                        <option <?php echo $this->gf->comparar_general('C',$TipoAcuerdo,'selected') ?>  value="C">Comisión</option>
-                        <option <?php echo $this->gf->comparar_general('A',$TipoAcuerdo,'selected') ?>  value="A">Ambas</option>
+                        <option <?php echo $this->gf->comparar_general('P', $TipoAcuerdo, 'selected') ?> value="P">Publicidad</option>
+                        <option <?php echo $this->gf->comparar_general('C', $TipoAcuerdo, 'selected') ?>  value="C">Comisión</option>
+                        <option <?php echo $this->gf->comparar_general('A', $TipoAcuerdo, 'selected') ?>  value="A">Ambas</option>
                     </select>
                 </div>
                 <br>
@@ -70,7 +75,7 @@
                 <div class="controls">
                     <select name="Pais" id="pais" onchange="llenar('provincia')">
                         <?php foreach ($paises_array as $var): ?>
-                            <option <?php echo $this->gf->comparar_general($var['CountryCode'],$Pais,'selected="selected"') ?> value="<?php echo $var['CountryCode'] ?>"><?php echo $var['CountryName'] ?></option>
+                            <option <?php echo $this->gf->comparar_general($var['CountryCode'], $Pais, 'selected="selected"') ?> value="<?php echo $var['CountryCode'] ?>"><?php echo $var['CountryName'] ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
@@ -111,15 +116,15 @@
                         <?php else: ?>
                             <option selected="selected" value="1" >Valle Grande</option>
                         <?php endif ?>
-                        
+
                     </select>
                 </div>
                 <br>
                 <label class="control-label" >Restaurant:</label>
                 <div class="controls">
                     <select name="Restaurant">
-                        <option <?php echo $this->gf->comparar_general($Restaurant,'si','selected="selected"') ?> value="si" >Si</option>
-                        <option <?php echo $this->gf->comparar_general($Restaurant,'no','selected="selected"') ?>  value="no" >No</option>
+                        <option <?php echo $this->gf->comparar_general($Restaurant, 'si', 'selected="selected"') ?> value="si" >Si</option>
+                        <option <?php echo $this->gf->comparar_general($Restaurant, 'no', 'selected="selected"') ?>  value="no" >No</option>
                     </select>
                 </div>
                 <br>
@@ -152,13 +157,13 @@
                 <div class="controls">
                     <textarea rows="3" name="DiasPolitica"><?php echo $DiasPolitica ?></textarea>
                 </div>
-<!-------------------------------------------------- ################## Metodos de Pago ############################################ ----->
+                <!-------------------------------------------------- ################## Metodos de Pago ############################################ ----->
                 <h4>Métodos de Pago</h4>
                 <hr>
                 <br>
                 <label class="control-label" >Acepta Seña:</label>
                 <div class="controls">
-                    <input type="checkbox" name="AceptaSenia" value="1" <?php echo $this->gf->comparar_general($AceptaSenia,'1','checked="checked"') ?>>
+                    <input type="checkbox" name="AceptaSenia" value="1" <?php echo $this->gf->comparar_general($AceptaSenia, '1', 'checked="checked"') ?>>
                 </div>
                 <br>
                 <label class="control-label" >Seña:</label>
@@ -168,7 +173,7 @@
                 <br>
                 <label class="control-label" >Comisión/Seña:</label>
                 <div class="controls">
-                    <input type="checkbox" id="comision_senia"  name="ComisionSenia" value="1" <?php echo $this->gf->comparar_general($ComisionSenia,'1','checked="checked"') ?>>
+                    <input type="checkbox" id="comision_senia"  name="ComisionSenia" value="1" <?php echo $this->gf->comparar_general($ComisionSenia, '1', 'checked="checked"') ?>>
                 </div>
                 <br>
                 <label class="control-label" >Comisión:</label>
@@ -178,7 +183,7 @@
                 <br>
                 <label class="control-label">Anticipado:</label>
                 <div class="controls">
-                    <input type="checkbox" name="Anticipado" value="1" <?php echo $this->gf->comparar_general($Anticipado,'1','checked="checked"') ?>> 
+                    <input type="checkbox" name="Anticipado" value="1" <?php echo $this->gf->comparar_general($Anticipado, '1', 'checked="checked"') ?>> 
                 </div>
                 <br>
                 <!-------------------------------------------------- ################## Configuraciones ############################################ ----->
@@ -193,17 +198,17 @@
                 <label class="control-label">Desta Orden:</label>
                 <div class="controls">
                     <select name="DestaOrden">
-                        <option <?php echo $this->gf->comparar_general('0',$DestaOrden,'selected="selected"') ?>>No Destacado</option>
-                        <option <?php echo $this->gf->comparar_general('1',$DestaOrden,'selected="selected"') ?>>1</option>
-                        <option <?php echo $this->gf->comparar_general('2',$DestaOrden,'selected="selected"') ?>>2</option>
-                        <option <?php echo $this->gf->comparar_general('3',$DestaOrden,'selected="selected"') ?>>3</option>
-                        <option <?php echo $this->gf->comparar_general('4',$DestaOrden,'selected="selected"') ?>>4</option>
+                        <option <?php echo $this->gf->comparar_general('0', $DestaOrden, 'selected="selected"') ?>>No Destacado</option>
+                        <option <?php echo $this->gf->comparar_general('1', $DestaOrden, 'selected="selected"') ?>>1</option>
+                        <option <?php echo $this->gf->comparar_general('2', $DestaOrden, 'selected="selected"') ?>>2</option>
+                        <option <?php echo $this->gf->comparar_general('3', $DestaOrden, 'selected="selected"') ?>>3</option>
+                        <option <?php echo $this->gf->comparar_general('4', $DestaOrden, 'selected="selected"') ?>>4</option>
                     </select>
                 </div>
                 <br>
                 <label class="control-label">Desta Home:</label>
                 <div class="controls">
-                    <input type="checkbox" name="DestaHome" value="1" <?php echo $this->gf->comparar_general($DestaHome,'1','checked="checked"') ?>> 
+                    <input type="checkbox" name="DestaHome" value="1" <?php echo $this->gf->comparar_general($DestaHome, '1', 'checked="checked"') ?>> 
                 </div>
                 <br>
             </div>

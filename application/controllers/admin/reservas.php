@@ -7,8 +7,9 @@ class Reservas extends CI_Controller {
 
         $this->load->model('admin/reservas_model');
         $this->load->model('admin/alojamientos_model');
-        $this->load->model('husped_model');
-        $this->load->model('cal_fecha');
+        $this->load->model('admin/huesped_model');
+        $this->load->model('admin/cal_fecha');
+        $this->load->model('admin/reservas_model');
         $this->load->library('pagination');
         $this->load->library('gf');
         
@@ -27,7 +28,6 @@ class Reservas extends CI_Controller {
 
         //Armado de URL
         $url = '?';
-
         if ($campo != '') {
             if ($valor != '')
                 $url = $url . "campo=" . $campo . "&valor=" . $valor;
@@ -114,9 +114,8 @@ class Reservas extends CI_Controller {
         $this->load->view('admin/templates/temp_menu', $data);
     }
 
-    function buscar_disponibilidad_ii() {
-
-
+    function buscar_disponibilidad_ii() 
+    {
         $cantidad_habitaciones = $this->input->post('cant_habitaciones');
         $id_alojamiento = $this->input->post('id_alojamiento');
 
@@ -183,14 +182,22 @@ class Reservas extends CI_Controller {
         //Datos reservas_Det
         $CheckIn = $this->input->post('checkin');
         $CheckOut = $this->input->post('checkout');
+        //Paso la fecha a formato que entienda la consulta la fecha
+        $CheckIn = $this->gf->html_mysql($CheckIn);
+        $CheckOut = $this->gf->html_mysql($CheckOut);
+        
         $rows_fechas=$this->cal_fecha->list_fechas_rango($CheckIn,$CheckOut);
-        $fe_array[];
+        $fe_array[count($rows_fechas)]="";
         $fe_count=0;
+        
+        //Paso los dias a un array comun para despues recorrerlos con un for comun
         foreach($rows_fechas as $var)
         {
             $fe_count++;
-            $fe_array[$fe_count]=$var;
+            $fe_array[$fe_count]=$var['fecha'];
         }
+        
+        
         
         
         echo "Como pagar : " . $this->input->post('metodo') . "<br>";
@@ -236,14 +243,39 @@ class Reservas extends CI_Controller {
             'Observacion' => $Observacion
         );
         
-        
         //Guardo y obtengo el ultimo id de la insercion
         $ID_Huesped = $this->huesped_model->insert($huesped_array);
         
+        //Buscar el ultimo id_reserva
+        $id_reserva=$this->reservas_model->max_id();
+        $id_reserva=$id_reserva+1;
+        $num_reserva=100+$id_reserva;
+        $num_reserva=$num_reserva.""; //pasar a string
+        
+        //Armado del localizador
+        $Localizador="SRL".$num_reserva;
+        
         $reservas_dat=array(
-            
-            
-            
+            'id_huesped' => '',
+            'fecha_ingreso' => '',
+            'fecha_salida' => '',
+            'alojamiento_id' => '',
+            'cant_pasajeros' => '',
+            'estado_reserva' => '',
+            'deposito' => '',
+            'observaciones' => '',
+            'costo_total' => '',
+            'fecha_reserva' => '',
+            'estado_pago'  => '',
+            'comision' => '',
+            'metodo_pago' => '',
+            'descuento' => '',
+            'web_reserva' => '',
+            'visitas' => '',
+            'cantidad_hab' => '',
+            'Localizador' => '',
+            'cant_dias' => '',
+            'id_promo' => ''
         );
         
         

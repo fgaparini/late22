@@ -36,6 +36,7 @@ class Alojamientos_model extends CI_Model
                 Direccion,
                 Telefono,
                 Email,
+                WebSite,
                 Responsable,
                 Descripcion,
                 Coordenadas,
