@@ -272,6 +272,7 @@
             </div>
             <input type="hidden" name="senia_total" id="total_senia" value="<?php echo $senia_total ?>" >
             <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
+            <input type="hidden" name="id_habitacion" value="<?php echo $id_habitacion ?>">
             <input type="hidden" name="cant_hab" value="<?php echo $cant_por_hab ?>">
             <input type="hidden" name="nombre_hab" value="<?php echo $precio_hab?>">
             <input type="hidden" name="precio_hab" value="<?php echo $nombre_hab ?>">

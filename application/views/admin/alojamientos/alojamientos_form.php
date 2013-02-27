@@ -198,11 +198,19 @@
                 <label class="control-label">Desta Orden:</label>
                 <div class="controls">
                     <select name="DestaOrden">
-                        <option <?php echo $this->gf->comparar_general('0', $DestaOrden, 'selected="selected"') ?>>No Destacado</option>
-                        <option <?php echo $this->gf->comparar_general('1', $DestaOrden, 'selected="selected"') ?>>1</option>
-                        <option <?php echo $this->gf->comparar_general('2', $DestaOrden, 'selected="selected"') ?>>2</option>
-                        <option <?php echo $this->gf->comparar_general('3', $DestaOrden, 'selected="selected"') ?>>3</option>
-                        <option <?php echo $this->gf->comparar_general('4', $DestaOrden, 'selected="selected"') ?>>4</option>
+                        <option value="0" <?php echo $this->gf->comparar_general('0', $DestaOrden, 'selected="selected"') ?>>No Destacado</option>
+                        <option value="1" <?php echo $this->gf->comparar_general('1', $DestaOrden, 'selected="selected"') ?>>1</option>
+                        <option value="2" <?php echo $this->gf->comparar_general('2', $DestaOrden, 'selected="selected"') ?>>2</option>
+                        <option value="3" <?php echo $this->gf->comparar_general('3', $DestaOrden, 'selected="selected"') ?>>3</option>
+                        <option value="4" <?php echo $this->gf->comparar_general('4', $DestaOrden, 'selected="selected"') ?>>4</option>
+                    </select>
+                </div>
+                <br>
+                <label class="control-label">Básico:</label>
+                <div class="controls">
+                    <select name="Basico">
+                        <option value="0" <?php echo $this->gf->comparar_general(0, $Basico, 'selected="selected"') ?>>No</option>
+                        <option value="1" <?php echo $this->gf->comparar_general(1, $Basico, 'selected="selected"') ?>>Si</option>
                     </select>
                 </div>
                 <br>

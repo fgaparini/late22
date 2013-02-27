@@ -77,6 +77,7 @@ class Alojamientos extends CI_Controller
         $data['Url'] = & $Url;
         $data['DestaOrden'] = & $DestaOrden;
         $data['DestaHome'] = & $DestaHome;
+        $data['Basico']= & $Basico;
 
         //Tabla informaciongeneral
         $data['ID_InformacionGeneral'] = & $ID_InformacionGeneral;
@@ -132,6 +133,7 @@ class Alojamientos extends CI_Controller
             $DestaOrden = $row->DestaOrden;
             $DestaHome = $row->DestaHome;
             $TipoAcuerdo = $row->TipoAcuerdo;
+            $Basico = $row->Basico;
 
             //Tabla informaciongeneral
             $ID_InformacionGeneral = $row->ID_InformacionGeneral;
@@ -260,7 +262,8 @@ class Alojamientos extends CI_Controller
                 'ID_MP' => $id_data_metodo_pago,
                 'ID_Modulos' => '0', //no se sabe
                 'Votos' => '0', //no se sabe
-                'Activo' => 'A' //no se sabe
+                'Activo' => 'A', //no se sabe
+                'Basico' => $this->input->post('Basico')
             );
 
             $id_data_alojamientos = $this->alojamientos_model->insert('alojamientos', $data_alojamientos);
@@ -280,7 +283,8 @@ class Alojamientos extends CI_Controller
                 'ID_MP' => $this->input->post('ID_MP'),
                 'ID_Modulos' => '0', //no se sabe
                 'Votos' => '0', //no se sabe
-                'Activo' => 'A' //no se sabe
+                'Activo' => 'A', //no se sabe
+                'Basico' => $this->input->post('Basico')
             );
 
             $this->alojamientos_model->update($ID_MP, $data_metodo_pago, 'ID_MP', 'metododepago');

@@ -179,6 +179,17 @@ class Reservas extends CI_Controller {
         $Provincia=$this->input->post('huesped_provincia');
         $Observacion=$this->input->post('Observacion');
         
+        //Datos arrays habitaciones
+        $cant_hab = $this->input->post('cant_hab');
+        $nombre_hab = $this->input->post('nombre_hab');
+        $precio_hab = $this->input->post('precio_hab');
+        
+        //Datos reservas_dat
+        $id_husped=$this->input->post();
+        $fecha_ingreso = $this->input->post();
+        $fecha_salida=$this->input->post();
+        $alojamiento_id=$this->input->post();
+        
         //Datos reservas_Det
         $CheckIn = $this->input->post('checkin');
         $CheckOut = $this->input->post('checkout');
@@ -197,7 +208,48 @@ class Reservas extends CI_Controller {
             $fe_array[$fe_count]=$var['fecha'];
         }
         
+        $huesped_array = array(
+            'NombreHuesped' => $NombreHuesped,
+            'ApellidoHuesped' => $ApellidoHuesped,
+            'EmailHuesped' => $EmailHuesped,
+            'Contrasenia' => $Contrasenia,
+            'TelefonoFijo' => $TelefonoFijo,
+            'TelefonoCelular' => $TelefonoCelular,
+            'DiasAcumulados' => $DiasAcumulados,
+            'Ciudad' => $Ciudad,
+            'Provincia' => $Provincia,
+            'Observacion' => $Observacion
+        );
         
+        //Guardo y obtengo el ultimo id de la insercion
+        $ID_Huesped = $this->huesped_model->insert($huesped_array);
+        
+        //Buscar el ultimo id_reserva
+        $id_reserva=$this->reservas_model->max_id();
+        $id_reserva=$id_reserva+1;
+        $num_reserva=100+$id_reserva;
+        $num_reserva=$num_reserva.""; //pasar a string
+        //Armado del localizador
+        $Localizador="SRL".$num_reserva;
+        
+        for($i=1 ; $i<=$fe_count ; $i++)
+        {
+            for($z=1 ; $z<=count($cant_hab) ; $z++)
+            {
+               $a_reservas_det=array(
+                 
+                   'Localizador' => $Localizador,
+                   'id_habitacion' => '',
+                   'fecha_reserva' => '',
+                   'cant_reserva' => '',
+                   'tarifa' => '',
+                   'id_detalle' => '',
+                   'num_hab' =>'',
+                   
+               );
+            }
+        }
+       
         
         
         echo "Como pagar : " . $this->input->post('metodo') . "<br>";
@@ -230,36 +282,16 @@ class Reservas extends CI_Controller {
         echo "checkout : " . $this->input->post('checkout') . "<br>";
         echo "descuento :" .$this->input->post('descuento')."<br>";
         
-        $huesped_array = array(
-            'NombreHuesped' => $NombreHuesped,
-            'ApellidoHuesped' => $ApellidoHuesped,
-            'EmailHuesped' => $EmailHuesped,
-            'Contrasenia' => $Contrasenia,
-            'TelefonoFijo' => $TelefonoFijo,
-            'TelefonoCelular' => $TelefonoCelular,
-            'DiasAcumulados' => $DiasAcumulados,
-            'Ciudad' => $Ciudad,
-            'Provincia' => $Provincia,
-            'Observacion' => $Observacion
-        );
         
-        //Guardo y obtengo el ultimo id de la insercion
-        $ID_Huesped = $this->huesped_model->insert($huesped_array);
         
-        //Buscar el ultimo id_reserva
-        $id_reserva=$this->reservas_model->max_id();
-        $id_reserva=$id_reserva+1;
-        $num_reserva=100+$id_reserva;
-        $num_reserva=$num_reserva.""; //pasar a string
         
-        //Armado del localizador
-        $Localizador="SRL".$num_reserva;
+        /*
         
         $reservas_dat=array(
-            'id_huesped' => '',
-            'fecha_ingreso' => '',
-            'fecha_salida' => '',
-            'alojamiento_id' => '',
+            'id_huesped' => $ID_Huesped,
+            'fecha_ingreso' => $CheckIn,
+            'fecha_salida' => $CheckOut,
+            'alojamiento_id' => '' ,
             'cant_pasajeros' => '',
             'estado_reserva' => '',
             'deposito' => '',
@@ -273,10 +305,10 @@ class Reservas extends CI_Controller {
             'web_reserva' => '',
             'visitas' => '',
             'cantidad_hab' => '',
-            'Localizador' => '',
+            'Localizador' => $Localizador,
             'cant_dias' => '',
             'id_promo' => ''
-        );
+        );*/
         
         
     }
