@@ -10,6 +10,7 @@ class Reservas extends CI_Controller {
         $this->load->model('admin/huesped_model');
         $this->load->model('admin/cal_fecha');
         $this->load->model('admin/reservas_model');
+        $this->load->model('admin/reservas_det_model');
         $this->load->library('pagination');
         $this->load->library('gf');
         
@@ -129,7 +130,7 @@ class Reservas extends CI_Controller {
             $subtotal = $cant_por_hab[$i] * $precio_hab[$i];
             $total = $subtotal + $total;
         }
-
+        
         //Arrays varios valores de habitaciones
         $data['nombre_hab'] = $nombre_hab;
         $data['id_habitacion'] = $id_habitacion;
@@ -179,10 +180,20 @@ class Reservas extends CI_Controller {
         $Provincia=$this->input->post('huesped_provincia');
         $Observacion=$this->input->post('Observacion');
         
-        //Datos arrays habitaciones
-        $cant_hab = $this->input->post('cant_hab');
-        $nombre_hab = $this->input->post('nombre_hab');
-        $precio_hab = $this->input->post('precio_hab');
+        //Arrays varios valores de habitaciones
+        $cantidad_habitaciones = $this->input->post('cantidad_habitaciones');
+        $id_habitacion;
+        $cant_por_hab;
+        $precio_hab;
+        $nombre_hab;
+        for($i=1 ; $i<=$cantidad_habitaciones ; $i++)
+        {
+            $id_habitacion[$i]=$this->input->post('id_habitacion_'.$i);
+            $cant_por_hab[$i]=$this->input->post('cant_por_hab_'.$i);
+            $precio_hab[$i]=$this->input->post('precio_hab_'.$i);
+            $nombre_hab[$i]=$this->input->post('nombre_hab_'.$i);
+        }
+        
         
         //Datos reservas_dat
         $id_husped=$this->input->post();
@@ -231,22 +242,25 @@ class Reservas extends CI_Controller {
         $num_reserva=$num_reserva.""; //pasar a string
         //Armado del localizador
         $Localizador="SRL".$num_reserva;
-        
+        $pasajeros=0;
         for($i=1 ; $i<=$fe_count ; $i++)
         {
-            for($z=1 ; $z<=count($cant_hab) ; $z++)
+            for($z=1 ; $z<=$cantidad_habitaciones ; $z++)
             {
-               $a_reservas_det=array(
-                 
+               $a_reservas_det=array(               
                    'Localizador' => $Localizador,
-                   'id_habitacion' => '',
-                   'fecha_reserva' => '',
-                   'cant_reserva' => '',
-                   'tarifa' => '',
+                   'id_habitacion' => $id_habitacion[$z],
+                   'fecha_reserva' => $fe_array[$i],
+                   'cant_reserva' => '1',
+                   'tarifa' => $precio_hab[$z],
                    'id_detalle' => '',
-                   'num_hab' =>'',
-                   
+                   'num_hab' =>$cant_por_hab[$z],  
                );
+               
+               $pasajeros = $cant_por_hab[$z]+$pasajeros;
+               
+             $this->reservas_det_model->insert($a_reservas_det);
+               
             }
         }
        

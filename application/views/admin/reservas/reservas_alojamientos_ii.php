@@ -272,16 +272,19 @@
             </div>
             <input type="hidden" name="senia_total" id="total_senia" value="<?php echo $senia_total ?>" >
             <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
-            <input type="hidden" name="id_habitacion" value="<?php echo $id_habitacion ?>">
-            <input type="hidden" name="cant_hab" value="<?php echo $cant_por_hab ?>">
-            <input type="hidden" name="nombre_hab" value="<?php echo $precio_hab?>">
-            <input type="hidden" name="precio_hab" value="<?php echo $nombre_hab ?>">
             <input type="hidden" name="nombre_alojamiento" value="<?php echo $nombre_alojamiento ?>">
             <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipoalojamiento ?>" >
             <input type="hidden" name="localidad" value="<?php echo $localidad ?>" >
             <input type="hidden" name="direccion" value="<?php echo  $direccion ?>">
             <input type="hidden" name="checkin" value="<?php echo  $checkin ?>">
             <input type="hidden" name="checkout" value="<?php echo $checkout  ?>">
+            <input type="hidden" name="cantidad_habitaciones" value="<?php echo $cantidad_habitaciones?>">  
+           <?php for($i=1 ; $i<=$cantidad_habitaciones ; $i++ ): ?>
+            <input type="hidden" value="<?php echo $id_habitacion[$i] ?>" name="id_habitacion_<?php echo $i; ?>">
+            <input type="hidden" value="<?php echo $cant_por_hab[$i] ?>" name="cant_por_hab_<?php echo $i; ?>">
+            <input type="hidden" value="<?php echo $precio_hab[$i] ?>" name="precio_hab_<?php echo $i; ?>">
+            <input type="hidden" value="<?php echo $nombre_hab[$i] ?>" name="nombre_hab_<?php echo $i; ?>">
+           <?php endfor; ?>
         </form>
     </div>
 </div>

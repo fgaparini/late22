@@ -227,7 +227,7 @@ class Reservas_model extends CI_Model
     
     function max_id()
     {
-        $query="select max(reserva_id) as max_id from reserva_dat";
+        $query="select max(reservas_id) as max_id from reserva_dat";
         $row = $this->db->query($query);
         $row = $row->row();
         return $row->max_id;
