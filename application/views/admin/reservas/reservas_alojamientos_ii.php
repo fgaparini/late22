@@ -102,7 +102,7 @@
                         <?php if ($Anticipado): ?>
                             <div class="span4">
                                 <label class="checkbox">
-                                    <input onclick="js_metodo('anticipado')"  type="radio" name="metodo"  value="aticipado">
+                                    <input onclick="js_metodo('anticipado')"  type="radio" name="metodo"  value="A">
                                     Anticipado
                                 </label>
                             </div>
@@ -110,14 +110,14 @@
                         <?php if ($AceptaSenia): ?>
                             <div class="span4">
                                 <label class="checkbox">
-                                    <input onclick="js_metodo('senia')" name="metodo" type="radio" value="senia">
+                                    <input onclick="js_metodo('senia')" name="metodo" type="radio" value="S">
                                     Seña
                                 </label>
                             </div>
                         <?php endif ?>
                         <div class="span4">
                             <label class="checkbox">
-                                <input onclick="js_metodo('garantia')" name="metodo" type="radio"  value="garantia">
+                                <input onclick="js_metodo('garantia')" name="metodo" type="radio"  value="G">
                                 Garantia targeta
                             </label>
                         </div>
@@ -135,8 +135,9 @@
                         <div class="offset1 span4">
                             <label><b>Metodo de pago:</b></label>
                             <select name="metodo_pago">
-                                <option value="banco">Banco (depósito, transferencia)</option>
-                                <option value="tarjeta">Targeta online</option>
+                                <option value="F">Ninguno</option>
+                                <option value="B">Banco (depósito, transferencia)</option>
+                                <option value="T">Targeta online</option>
                             </select>
                         </div>
                     </div>
@@ -273,6 +274,8 @@
             <input type="hidden" name="senia_total" id="total_senia" value="<?php echo $senia_total ?>" >
             <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
             <input type="hidden" name="nombre_alojamiento" value="<?php echo $nombre_alojamiento ?>">
+            <input type="hidden" name="id_alojamiento" value="<?php echo $id_alojamiento ?>"
+                   <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipo_alojamiento ?>"
             <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipoalojamiento ?>" >
             <input type="hidden" name="localidad" value="<?php echo $localidad ?>" >
             <input type="hidden" name="direccion" value="<?php echo  $direccion ?>">

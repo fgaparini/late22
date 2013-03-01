@@ -9,6 +9,12 @@ class Reservas_model extends CI_Model
         parent::__construct();
     }
 
+    function insert($row = array())
+    {
+        $this->db->insert('reserva_dat', $row);
+        return $this->db->insert_id();
+    }
+    
     function reservas_filtro($orden, $campo, $valor, $start, $end)
     {
         $query_list = '';
@@ -203,6 +209,20 @@ class Reservas_model extends CI_Model
         return $rows;
     }
     
+    function comision_mp($id_alojamiento)
+    {
+        $query=sprintf("
+            select m.Comision from alojamientos as a
+            inner join 
+            metododepago as m
+            on
+            a.ID_MP=m.ID_MP
+            where a.ID_Alojamiento=%s",$id_alojamiento);
+        $row = $this->db->query($query);
+        $row = $row->row();
+        return $row->Comision;
+    }
+    
     function select_mp_alo($id_alojamiento)
     {
         $query=  sprintf("
@@ -232,7 +252,19 @@ class Reservas_model extends CI_Model
         $row = $row->row();
         return $row->max_id;
     }
-
+    
+    function alojamiento_responsable($id_alojamiento)
+    {
+        $query= sprintf("
+            select i.Responsable from alojamientos as a
+            inner join 
+            informaciongeneral as i
+            on
+            a.ID_InformacionGeneral=i.ID_InformacionGeneral
+            where a.ID_Alojamiento=%s",$id_alojamiento);
+        
+        $row=$this->db->query($query);
+        $row=$row->row();
+        return $row->Responsable;
+    }
 }
-
-?>

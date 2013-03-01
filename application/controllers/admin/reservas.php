@@ -167,18 +167,17 @@ class Reservas extends CI_Controller {
     }
 
     function buscar_disponibilidad_iii() {
-
+        
         //Datos huesped
         $NombreHuesped=$this->input->post('huesped_nombre');
-        $ApellidoHuesped=$this->input->post('ApellidoHuesped');
-        $EmailHuesped=$this->input->post('EmailHuesped');
+        $ApellidoHuesped=$this->input->post('huesped_apellido');
+        $EmailHuesped=$this->input->post('huesped_correo');
         $Contrasenia="";
         $TelefonoFijo=$this->input->post('huesped_telefono');
         $TelefonoCelular="";
         $DiasAcumulados="";
         $Ciudad=$this->input->post('huesped_ciudad');
         $Provincia=$this->input->post('huesped_provincia');
-        $Observacion=$this->input->post('Observacion');
         
         //Arrays varios valores de habitaciones
         $cantidad_habitaciones = $this->input->post('cantidad_habitaciones');
@@ -194,13 +193,6 @@ class Reservas extends CI_Controller {
             $nombre_hab[$i]=$this->input->post('nombre_hab_'.$i);
         }
         
-        
-        //Datos reservas_dat
-        $id_husped=$this->input->post();
-        $fecha_ingreso = $this->input->post();
-        $fecha_salida=$this->input->post();
-        $alojamiento_id=$this->input->post();
-        
         //Datos reservas_Det
         $CheckIn = $this->input->post('checkin');
         $CheckOut = $this->input->post('checkout');
@@ -209,9 +201,8 @@ class Reservas extends CI_Controller {
         $CheckOut = $this->gf->html_mysql($CheckOut);
         
         $rows_fechas=$this->cal_fecha->list_fechas_rango($CheckIn,$CheckOut);
-        $fe_array[count($rows_fechas)]="";
+        $fe_array="";
         $fe_count=0;
-        
         //Paso los dias a un array comun para despues recorrerlos con un for comun
         foreach($rows_fechas as $var)
         {
@@ -228,12 +219,11 @@ class Reservas extends CI_Controller {
             'TelefonoCelular' => $TelefonoCelular,
             'DiasAcumulados' => $DiasAcumulados,
             'Ciudad' => $Ciudad,
-            'Provincia' => $Provincia,
-            'Observacion' => $Observacion
+            'Provincia' => $Provincia
         );
         
         //Guardo y obtengo el ultimo id de la insercion
-        $ID_Huesped = $this->huesped_model->insert($huesped_array);
+        $ID_Huesped = 0;//$this->huesped_model->insert($huesped_array);
         
         //Buscar el ultimo id_reserva
         $id_reserva=$this->reservas_model->max_id();
@@ -243,6 +233,7 @@ class Reservas extends CI_Controller {
         //Armado del localizador
         $Localizador="SRL".$num_reserva;
         $pasajeros=0;
+        
         for($i=1 ; $i<=$fe_count ; $i++)
         {
             for($z=1 ; $z<=$cantidad_habitaciones ; $z++)
@@ -258,14 +249,101 @@ class Reservas extends CI_Controller {
                );
                
                $pasajeros = $cant_por_hab[$z]+$pasajeros;
-               
-             $this->reservas_det_model->insert($a_reservas_det);
-               
+             //$this->reservas_det_model->insert($a_reservas_det);
             }
         }
        
+        //Datos reservas_dat
+        $id_husped=$ID_Huesped;
+        $fecha_ingreso = $CheckIn;
+        $fecha_salida=$CheckOut;
+        $alojamiento_id=$this->input->post('id_alojamiento');
+        $cant_pasajeros=$pasajeros;
+        $estado_reserva="P";
+        $deposito="";
+        $observaciones=$this->input->post('hueped_observaciones');;//post de reservarII
+        $costo_total=$this->input->post('total');
+        $fecha_reserva=date("Y-m-d");
+        $estado_pago="P";//P(pendiente) O (OK)
+        $comision=$this->reservas_model->comision_mp($alojamiento_id);
+        $metodo_pago=$this->input->post('metodo');
+        $descuento=$this->input->post('descuento');
+        $web_reserva="SRL";
+        $visitas="";
+        $cantidad_hab=$cantidad_habitaciones;
+        $Localizador=$Localizador;
+        $cant_dias=$fe_count;
+        $id_promo="";
+        $tipo_pago=$this->input->post('metodo_pago');
+        
+        $reservas_dat=array(
+            'id_huesped' => $id_husped,
+            'fecha_ingreso' => $fecha_ingreso,
+            'fecha_salida' => $fecha_salida,
+            'alojamiento_id' => $alojamiento_id ,
+            'cant_pasajeros' => $cant_pasajeros,
+            'estado_reserva' => $estado_reserva,
+            'deposito' => $deposito,
+            'observaciones' => $observaciones,
+            'costo_total' => $costo_total,
+            'fecha_reserva' => $fecha_reserva,
+            'estado_pago'  => $estado_pago,
+            'comision' => $comision,
+            'metodo_pago' => $metodo_pago,
+            'descuento' => $descuento,
+            'web_reserva' => $web_reserva,
+            'visitas' => $visitas,
+            'cantidad_hab' => $cantidad_hab,
+            'Localizador' => $Localizador,
+            'cant_dias' => $cant_dias,
+            'id_promo' => $id_promo,
+            'tipo_pago' => $tipo_pago
+            );
+        //Agregar campo tipo_pago
+       //$this->reservas_model->insert($reservas_dat);
+        
+        //Buscar responsable
+        $responsable=$this->reservas_model->alojamiento_responsable($alojamiento_id);
+        //Armar forma de pago
+        if($metodo_pago=='A')
+            $metodo_pago_str="Anticipado (total anticipado)";
+        elseif($metodo_pago=='S')
+            $metodo_pago_str="Seña (seña + resto al llegar)";
+        elseif($garantia=='G')
+            $metodo_pago_str="Garantía (pago en alojamiento)";
+        
+        $data['tipo_Hotel']=$this->input->post('tipo_alojamiento');
+        $data['nombre_Hotel']=$this->input->post('nombre_alojamiento');
+        $data['responsable']=$responsable;
+        $data['localizador']=$Localizador;
+        $data['nombre']=$NombreHuesped;
+        $data['apellido']=$ApellidoHuesped;
+        $data['telefono']=$TelefonoFijo;
+        $data['email']=$EmailHuesped;
+        $data['ciudad']=$Ciudad;
+        $data['provincia']=$Provincia;
+        $data['fecha1']=$CheckIn;
+        $data['fecha2']=$CheckOut;
+        $data['cant_dias']=$fe_count;
+        $data['cant_paxs']=$pasajeros;
+        $data['total_estadia']=$costo_total;
+        $data['pago3']=$metodo_pago_str;
+        $data['consulta']=$observaciones;
+        
+        //para el detalle de habitaciones
+        $data['cant_por_hab']=$cant_por_hab;
+        $data['precio_hab']=$precio_hab;
+        $data['nombre_hab']=$nombre_hab;
+        $data['cantidad_habitaciones']=$cantidad_habitaciones;
+        $data['cant_por_hab']=$cant_por_hab;
+        $data['cantidad_dias']=$fe_count;
+        
+        $this->load->view('admin/mails/mail_general',$data);
         
         
+        
+        
+        /*
         echo "Como pagar : " . $this->input->post('metodo') . "<br>";
         echo "forma de pago : " . $this->input->post('metodo_pago') . "<br>";
         echo "tipo tarjeta : " . $this->input->post('tarjeta_tipo') . "<br>";
@@ -289,41 +367,40 @@ class Reservas extends CI_Controller {
         echo "nombre_hab : " . $this->input->post('nombre_hab') . "<br>";
         echo "precio_hab : " . $this->input->post('precio_hab') . "<br>";
         echo "nombre_alojamiento : " . $this->input->post('nombre_alojamiento') . "<br>";
+        echo "id_alojamiento: " .$this->input->post('id_alojamiento') . "<br>";  
         echo "tipo_alojamiento : " . $this->input->post('tipo_alojamiento') . "<br>";
         echo "localidad : " . $this->input->post('localidad') . "<br>";
         echo "direccion : " . $this->input->post('direccion') . "<br>";
         echo "checkin : " . $this->input->post('checkin') . "<br>";
         echo "checkout : " . $this->input->post('checkout') . "<br>";
         echo "descuento :" .$this->input->post('descuento')."<br>";
+         * 
+         * 
+         * //password  Mis Reserva -------------------------------
+$str = "abcdefghijklmnopqrstuvwxyz1234567890";
+$pass = "";
+for($i=0;$i<7;$i++) {
+$pass .= substr($str,rand(0,36),1);
+}
+         * 
+         * 
+         * 
+         * //banco
+         * $datos_bancos =" <b>Entidad Bancaria:</b>".ucwords($row_bankdbh['banco'])."<br />
+  <b>Titular Cuenta:</b>".ucwords($row_bankdbh['titular']).".<br />
+  <b>Tipo de Cuenta:</b>".ucwords($row_bankdbh['tipo_cuenta'])."<br />
+  <b>Moneda:</b>".ucwords($row_bankdbh['moneda'])."<br />
+  <b>Numero de Cuenta :</b>".$row_bankdbh['num_cuenta']."<br />
+  <b>Sucursal:</b>".$row_bankdbh['sucursal']."<br />
+  <b>Cuit :</b>".$row_bankdbh['cuit']."<br />
+  <b>CBU:</b>".$row_bankdbh['CBU']."<br />";
+       */
         
         
         
         
-        /*
         
-        $reservas_dat=array(
-            'id_huesped' => $ID_Huesped,
-            'fecha_ingreso' => $CheckIn,
-            'fecha_salida' => $CheckOut,
-            'alojamiento_id' => '' ,
-            'cant_pasajeros' => '',
-            'estado_reserva' => '',
-            'deposito' => '',
-            'observaciones' => '',
-            'costo_total' => '',
-            'fecha_reserva' => '',
-            'estado_pago'  => '',
-            'comision' => '',
-            'metodo_pago' => '',
-            'descuento' => '',
-            'web_reserva' => '',
-            'visitas' => '',
-            'cantidad_hab' => '',
-            'Localizador' => $Localizador,
-            'cant_dias' => '',
-            'id_promo' => ''
-        );*/
-        
+     
         
     }
 
