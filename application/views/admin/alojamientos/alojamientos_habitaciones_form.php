@@ -22,7 +22,7 @@
             <br>
         </div>
         <div class="row-fluid">
-            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>alojamientos/alojamientos_habitaciones_save" enctype="multipart/form-data">
+            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>admin/alojamientos/alojamientos_habitaciones_save" enctype="multipart/form-data">
                 <div class="control-group">
                     <label class="control-label" >Nombre:</label>
                     <div class="controls">
@@ -70,6 +70,18 @@
                             <?php foreach ($tipo_alojamientos_array as $var): ?>
                                 <option <?php echo $this->gf->comparar_general($var['ID_TipoHabitacion'],$ID_TipoHabitacion,'selected="selected"') ?> value="<?php echo $var['ID_TipoHabitacion'] ?>" ><?php echo $var['TipoHabitacion'] ?></option>
                             <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" >Unidad Alojativa:</label>
+                    <div class="controls">
+                        <select name="UnidadAlojativa">
+                            <option <?php echo $this->gf->comparar_general($UnidadAlojativa,'habitacion','selected') ?> value="habitacion">Habitación</option>
+                            <option <?php echo $this->gf->comparar_general($UnidadAlojativa,'depto','selected') ?>  value="depto">Departamento</option>
+                            <option <?php echo $this->gf->comparar_general($UnidadAlojativa,'cabaña','selected') ?>  value="cabaña">Cabaña</option>
+                            <option <?php echo $this->gf->comparar_general($UnidadAlojativa,'chalet','selected') ?>  value="chalet">Chalet</option>
+                            <option <?php echo $this->gf->comparar_general($UnidadAlojativa,'casa','selected') ?>  value="casa">Casa</option>
                         </select>
                     </div>
                 </div>

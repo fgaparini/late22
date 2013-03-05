@@ -33,7 +33,6 @@ function aplicar_descuento()
     
     des=descuento*total/100;
     des_total=total-des;
-    
     $('#total_estadia').text(des_total);
     
     

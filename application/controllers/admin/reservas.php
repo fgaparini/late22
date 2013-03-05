@@ -13,7 +13,6 @@ class Reservas extends CI_Controller {
         $this->load->model('admin/reservas_det_model');
         $this->load->library('pagination');
         $this->load->library('gf');
-        
     }
 
     function index() {
@@ -115,8 +114,7 @@ class Reservas extends CI_Controller {
         $this->load->view('admin/templates/temp_menu', $data);
     }
 
-    function buscar_disponibilidad_ii() 
-    {
+    function buscar_disponibilidad_ii() {
         $cantidad_habitaciones = $this->input->post('cant_habitaciones');
         $id_alojamiento = $this->input->post('id_alojamiento');
 
@@ -130,7 +128,7 @@ class Reservas extends CI_Controller {
             $subtotal = $cant_por_hab[$i] * $precio_hab[$i];
             $total = $subtotal + $total;
         }
-        
+
         //Arrays varios valores de habitaciones
         $data['nombre_hab'] = $nombre_hab;
         $data['id_habitacion'] = $id_habitacion;
@@ -167,49 +165,70 @@ class Reservas extends CI_Controller {
     }
 
     function buscar_disponibilidad_iii() {
-        
+
         //Datos huesped
-        $NombreHuesped=$this->input->post('huesped_nombre');
-        $ApellidoHuesped=$this->input->post('huesped_apellido');
-        $EmailHuesped=$this->input->post('huesped_correo');
-        $Contrasenia="";
-        $TelefonoFijo=$this->input->post('huesped_telefono');
-        $TelefonoCelular="";
-        $DiasAcumulados="";
-        $Ciudad=$this->input->post('huesped_ciudad');
-        $Provincia=$this->input->post('huesped_provincia');
-        
-        //Arrays varios valores de habitaciones
-        $cantidad_habitaciones = $this->input->post('cantidad_habitaciones');
-        $id_habitacion;
-        $cant_por_hab;
-        $precio_hab;
-        $nombre_hab;
-        for($i=1 ; $i<=$cantidad_habitaciones ; $i++)
-        {
-            $id_habitacion[$i]=$this->input->post('id_habitacion_'.$i);
-            $cant_por_hab[$i]=$this->input->post('cant_por_hab_'.$i);
-            $precio_hab[$i]=$this->input->post('precio_hab_'.$i);
-            $nombre_hab[$i]=$this->input->post('nombre_hab_'.$i);
-        }
-        
+        $NombreHuesped = $this->input->post('huesped_nombre');
+        $ApellidoHuesped = $this->input->post('huesped_apellido');
+        $EmailHuesped = $this->input->post('huesped_correo');
+        $Contrasenia = "";
+        $TelefonoFijo = $this->input->post('huesped_telefono');
+        $TelefonoCelular = "";
+        $DiasAcumulados = "";
+        $Ciudad = $this->input->post('huesped_ciudad');
+        $Provincia = $this->input->post('huesped_provincia');
+
         //Datos reservas_Det
         $CheckIn = $this->input->post('checkin');
         $CheckOut = $this->input->post('checkout');
         //Paso la fecha a formato que entienda la consulta la fecha
         $CheckIn = $this->gf->html_mysql($CheckIn);
         $CheckOut = $this->gf->html_mysql($CheckOut);
-        
-        $rows_fechas=$this->cal_fecha->list_fechas_rango($CheckIn,$CheckOut);
-        $fe_array="";
-        $fe_count=0;
+
+        $rows_fechas = $this->cal_fecha->list_fechas_rango($CheckIn, $CheckOut);
+        $fe_array = "";
+        $fe_count = 0;
         //Paso los dias a un array comun para despues recorrerlos con un for comun
-        foreach($rows_fechas as $var)
-        {
+        foreach ($rows_fechas as $var) {
             $fe_count++;
-            $fe_array[$fe_count]=$var['fecha'];
+            $fe_array[$fe_count] = $var['fecha'];
         }
-        
+
+
+        //Arrays varios valores de habitaciones
+        $cantidad_habitaciones = $this->input->post('cantidad_habitaciones');
+        $id_habitacion;
+        $ids_habitacion;
+        $cant_por_hab;
+        $precio_hab;
+        $nombre_hab;
+        $tarifa_oferta;
+        $tarifa_normal;
+        $unidad_alojativa;
+        $total_final = 0;
+        $cant_por_habitacion=0;
+        $z=1;
+        for ($i = 1; $i <= $cantidad_habitaciones; $i++) 
+        {
+            $id_habitacion = $this->input->post('id_habitacion_' . $i);
+            $cant_por_habitacion = $this->input->post('cant_por_hab_' . $i);
+            $ids_habitacion[$i]=$id_habitacion;
+            $cant_por_hab[$i] = $cant_por_habitacion;
+            $row = $this->reservas_model->datos_habitacion($id_habitacion);
+            $nombre_hab[$i]=$row->NombreHab;
+            $unidad_alojativa[$i]=$row->UnidadAlojativa;
+            for ($z = 1; $z <= $fe_count; $z++) 
+            {
+                $fecha = $fe_array[$z];
+                $row_habitacion = $this->reservas_model->precio_cal_calendar($id_habitacion, $fecha);
+                $precio_oferta = $row_habitacion->tarifa_oferta;
+                $precio_normal = $row_habitacion->tarifa_normal;
+
+                $tarifa_normal[$i][$z] = $precio_normal;
+                $tarifa_oferta[$i][$z] = $precio_oferta;
+            }
+        }
+
+
         $huesped_array = array(
             'NombreHuesped' => $NombreHuesped,
             'ApellidoHuesped' => $ApellidoHuesped,
@@ -221,73 +240,71 @@ class Reservas extends CI_Controller {
             'Ciudad' => $Ciudad,
             'Provincia' => $Provincia
         );
-        
+
         //Guardo y obtengo el ultimo id de la insercion
-        $ID_Huesped = 0;//$this->huesped_model->insert($huesped_array);
-        
+        $ID_Huesped = 0; //$this->huesped_model->insert($huesped_array);
         //Buscar el ultimo id_reserva
-        $id_reserva=$this->reservas_model->max_id();
-        $id_reserva=$id_reserva+1;
-        $num_reserva=100+$id_reserva;
-        $num_reserva=$num_reserva.""; //pasar a string
+        $id_reserva = $this->reservas_model->max_id();
+        $id_reserva = $id_reserva + 1;
+        $num_reserva = 100 + $id_reserva;
+        $num_reserva = $num_reserva . ""; //pasar a string
         //Armado del localizador
-        $Localizador="SRL".$num_reserva;
-        $pasajeros=0;
-        
-        for($i=1 ; $i<=$fe_count ; $i++)
-        {
-            for($z=1 ; $z<=$cantidad_habitaciones ; $z++)
-            {
-               $a_reservas_det=array(               
-                   'Localizador' => $Localizador,
-                   'id_habitacion' => $id_habitacion[$z],
-                   'fecha_reserva' => $fe_array[$i],
-                   'cant_reserva' => '1',
-                   'tarifa' => $precio_hab[$z],
-                   'id_detalle' => '',
-                   'num_hab' =>$cant_por_hab[$z],  
-               );
-               
-               $pasajeros = $cant_por_hab[$z]+$pasajeros;
-             //$this->reservas_det_model->insert($a_reservas_det);
+        $Localizador = "SRL" . $num_reserva;
+        $pasajeros = 0;
+
+        for ($i = 1; $i <= $fe_count; $i++) {
+            for ($z = 1; $z <= $cantidad_habitaciones; $z++) {
+                $a_reservas_det = array(
+                    'Localizador' => $Localizador,
+                    'id_habitacion' => $ids_habitacion[$z],
+                    'fecha_reserva' => $fe_array[$i],
+                    'cant_reserva' => '1',
+                    'tarifa' => $tarifa_oferta[$z][$i],
+                    'tarifa_oferta' => $tarifa_oferta[$z][$i],
+                    'id_detalle' => '',
+                    'num_hab' => $cant_por_hab[$z],
+                );
+                $pasajeros = $cant_por_hab[$z] + $pasajeros;
+                //$this->reservas_det_model->insert($a_reservas_det);
             }
         }
-       
+
         //Datos reservas_dat
-        $id_husped=$ID_Huesped;
+        $id_husped = $ID_Huesped;
         $fecha_ingreso = $CheckIn;
-        $fecha_salida=$CheckOut;
-        $alojamiento_id=$this->input->post('id_alojamiento');
-        $cant_pasajeros=$pasajeros;
-        $estado_reserva="P";
-        $deposito="";
-        $observaciones=$this->input->post('hueped_observaciones');;//post de reservarII
-        $costo_total=$this->input->post('total');
-        $fecha_reserva=date("Y-m-d");
-        $estado_pago="P";//P(pendiente) O (OK)
-        $comision=$this->reservas_model->comision_mp($alojamiento_id);
-        $metodo_pago=$this->input->post('metodo');
-        $descuento=$this->input->post('descuento');
-        $web_reserva="SRL";
-        $visitas="";
-        $cantidad_hab=$cantidad_habitaciones;
-        $Localizador=$Localizador;
-        $cant_dias=$fe_count;
-        $id_promo="";
-        $tipo_pago=$this->input->post('metodo_pago');
-        
-        $reservas_dat=array(
+        $fecha_salida = $CheckOut;
+        $alojamiento_id = $this->input->post('id_alojamiento');
+        $cant_pasajeros = $pasajeros;
+        $estado_reserva = "P";
+        $deposito = "";
+        $observaciones = $this->input->post('hueped_observaciones');
+        //post de reservarII
+        $costo_total = $this->input->post('total');
+        $fecha_reserva = date("Y-m-d");
+        $estado_pago = "P"; //P(pendiente) O (OK)
+        $comision = $this->reservas_model->comision_mp($alojamiento_id);
+        $metodo_pago = $this->input->post('metodo');
+        $descuento = $this->input->post('descuento');
+        $web_reserva = "SRL";
+        $visitas = "";
+        $cantidad_hab = $cantidad_habitaciones;
+        $Localizador = $Localizador;
+        $cant_dias = $fe_count;
+        $id_promo = "";
+        $tipo_pago = $this->input->post('metodo_pago');
+
+        $reservas_dat = array(
             'id_huesped' => $id_husped,
             'fecha_ingreso' => $fecha_ingreso,
             'fecha_salida' => $fecha_salida,
-            'alojamiento_id' => $alojamiento_id ,
+            'alojamiento_id' => $alojamiento_id,
             'cant_pasajeros' => $cant_pasajeros,
             'estado_reserva' => $estado_reserva,
             'deposito' => $deposito,
             'observaciones' => $observaciones,
             'costo_total' => $costo_total,
             'fecha_reserva' => $fecha_reserva,
-            'estado_pago'  => $estado_pago,
+            'estado_pago' => $estado_pago,
             'comision' => $comision,
             'metodo_pago' => $metodo_pago,
             'descuento' => $descuento,
@@ -298,110 +315,111 @@ class Reservas extends CI_Controller {
             'cant_dias' => $cant_dias,
             'id_promo' => $id_promo,
             'tipo_pago' => $tipo_pago
-            );
+        );
         //Agregar campo tipo_pago
-       //$this->reservas_model->insert($reservas_dat);
-        
+        //$this->reservas_model->insert($reservas_dat);
         //Buscar responsable
-        $responsable=$this->reservas_model->alojamiento_responsable($alojamiento_id);
+        $responsable = $this->reservas_model->alojamiento_responsable($alojamiento_id);
         //Armar forma de pago
-        if($metodo_pago=='A')
-            $metodo_pago_str="Anticipado (total anticipado)";
-        elseif($metodo_pago=='S')
-            $metodo_pago_str="Seña (seña + resto al llegar)";
-        elseif($garantia=='G')
-            $metodo_pago_str="Garantía (pago en alojamiento)";
+        $metodo_pago_str="";
+        if ($metodo_pago == 'A')
+            $metodo_pago_str = "Anticipado (total anticipado)";
+        elseif ($metodo_pago == 'S')
+            $metodo_pago_str = "Seña (seña + resto al llegar)";
+        elseif ($metodo_pago == 'G')
+            $metodo_pago_str = "Garantía (pago en alojamiento)";
+
+        $data['tipo_Hotel'] = $this->input->post('tipo_alojamiento');
+        $data['nombre_Hotel'] = $this->input->post('nombre_alojamiento');
+        $data['descuento'] = $this->input->post('descuento');
+        $data['responsable'] = $responsable;
+        $data['localizador'] = $Localizador;
+        $data['nombre'] = $NombreHuesped;
+        $data['apellido'] = $ApellidoHuesped;
+        $data['telefono'] = $TelefonoFijo;
+        $data['email'] = $EmailHuesped;
+        $data['ciudad'] = $Ciudad;
+        $data['provincia'] = $Provincia;
+        $data['fecha1'] = $CheckIn;
+        $data['fecha2'] = $CheckOut;
+        $data['cant_dias'] = $fe_count;
+        $data['cant_paxs'] = $pasajeros;
+        $data['total_estadia'] = $costo_total;
+        $data['pago3'] = $metodo_pago_str;
+        $data['consulta'] = $observaciones;
+
+        //para el detalle de habitaciones array comunes []
+        $data['cant_por_hab'] = $cant_por_hab;
+        $data['nombre_hab'] = $nombre_hab;
+        $data['cantidad_habitaciones'] = $cantidad_habitaciones;
+        $data['cant_por_hab'] = $cant_por_hab;
+        $data['cantidad_dias'] = $fe_count;
+        $data['unidad_alojativa'] = $unidad_alojativa;
+        $data['fe_array']=$fe_array;
+        $data['ids_habitacion']=$ids_habitacion;
         
-        $data['tipo_Hotel']=$this->input->post('tipo_alojamiento');
-        $data['nombre_Hotel']=$this->input->post('nombre_alojamiento');
-        $data['responsable']=$responsable;
-        $data['localizador']=$Localizador;
-        $data['nombre']=$NombreHuesped;
-        $data['apellido']=$ApellidoHuesped;
-        $data['telefono']=$TelefonoFijo;
-        $data['email']=$EmailHuesped;
-        $data['ciudad']=$Ciudad;
-        $data['provincia']=$Provincia;
-        $data['fecha1']=$CheckIn;
-        $data['fecha2']=$CheckOut;
-        $data['cant_dias']=$fe_count;
-        $data['cant_paxs']=$pasajeros;
-        $data['total_estadia']=$costo_total;
-        $data['pago3']=$metodo_pago_str;
-        $data['consulta']=$observaciones;
+        //para detalle de dias array doble[][]
+        $data['tarifa_normal'] = $tarifa_normal;
+        $data['tarifa_oferta'] = $tarifa_oferta;
         
-        //para el detalle de habitaciones
-        $data['cant_por_hab']=$cant_por_hab;
-        $data['precio_hab']=$precio_hab;
-        $data['nombre_hab']=$nombre_hab;
-        $data['cantidad_habitaciones']=$cantidad_habitaciones;
-        $data['cant_por_hab']=$cant_por_hab;
-        $data['cantidad_dias']=$fe_count;
-        
-        $this->load->view('admin/mails/mail_general',$data);
-        
-        
-        
-        
+
+        $this->load->view('admin/mails/mail_general', $data);
+
+
+
+
         /*
-        echo "Como pagar : " . $this->input->post('metodo') . "<br>";
-        echo "forma de pago : " . $this->input->post('metodo_pago') . "<br>";
-        echo "tipo tarjeta : " . $this->input->post('tarjeta_tipo') . "<br>";
-        echo "metodo de pago : " . $this->input->post('tarjeta_titular') . "<br>";
-        echo "tarjeta numero : " . $this->input->post('tarjeta_numero') . "<br>";
-        echo "tarjeta vencimiento : " . $this->input->post('tarjeta_vencimiento') . "<br>";
-        echo "tarjeta codigo : " . $this->input->post('tarjeta_codigo') . "<br>";
-        echo "huesped nombre : " . $this->input->post('huesped_nombre') . "<br>";
-        echo "huesped correo : " . $this->input->post('huesped_correo') . "<br>";
-        echo "huesped ciudad : " . $this->input->post('huesped_ciudad') . "<br>";
-        echo "huesped apellido : " . $this->input->post('huesped_apellido') . "<br>";
-        echo "huesped telefono : " . $this->input->post('huesped_telefono') . "<br>";
-        echo "huesped provincia : " . $this->input->post('huesped_provincia') . "<br>";
-        echo "huesped observaciones : " . $this->input->post('hueped_observaciones') . "<br>";
-        echo "mail huesped : " . $this->input->post('envio_huesped') . "<br>";
-        echo "mail alojamiento : " . $this->input->post('envio_alojamiento') . "<br>";
-        echo "senia total : " . $this->input->post('senia_total') . "<br>";
-        echo "senia total : " . $this->input->post('total') . "<br>";
-        
-        echo "cant_hab : " . $this->input->post('cant_hab') . "<br>";
-        echo "nombre_hab : " . $this->input->post('nombre_hab') . "<br>";
-        echo "precio_hab : " . $this->input->post('precio_hab') . "<br>";
-        echo "nombre_alojamiento : " . $this->input->post('nombre_alojamiento') . "<br>";
-        echo "id_alojamiento: " .$this->input->post('id_alojamiento') . "<br>";  
-        echo "tipo_alojamiento : " . $this->input->post('tipo_alojamiento') . "<br>";
-        echo "localidad : " . $this->input->post('localidad') . "<br>";
-        echo "direccion : " . $this->input->post('direccion') . "<br>";
-        echo "checkin : " . $this->input->post('checkin') . "<br>";
-        echo "checkout : " . $this->input->post('checkout') . "<br>";
-        echo "descuento :" .$this->input->post('descuento')."<br>";
+          echo "Como pagar : " . $this->input->post('metodo') . "<br>";
+          echo "forma de pago : " . $this->input->post('metodo_pago') . "<br>";
+          echo "tipo tarjeta : " . $this->input->post('tarjeta_tipo') . "<br>";
+          echo "metodo de pago : " . $this->input->post('tarjeta_titular') . "<br>";
+          echo "tarjeta numero : " . $this->input->post('tarjeta_numero') . "<br>";
+          echo "tarjeta vencimiento : " . $this->input->post('tarjeta_vencimiento') . "<br>";
+          echo "tarjeta codigo : " . $this->input->post('tarjeta_codigo') . "<br>";
+          echo "huesped nombre : " . $this->input->post('huesped_nombre') . "<br>";
+          echo "huesped correo : " . $this->input->post('huesped_correo') . "<br>";
+          echo "huesped ciudad : " . $this->input->post('huesped_ciudad') . "<br>";
+          echo "huesped apellido : " . $this->input->post('huesped_apellido') . "<br>";
+          echo "huesped telefono : " . $this->input->post('huesped_telefono') . "<br>";
+          echo "huesped provincia : " . $this->input->post('huesped_provincia') . "<br>";
+          echo "huesped observaciones : " . $this->input->post('hueped_observaciones') . "<br>";
+          echo "mail huesped : " . $this->input->post('envio_huesped') . "<br>";
+          echo "mail alojamiento : " . $this->input->post('envio_alojamiento') . "<br>";
+          echo "senia total : " . $this->input->post('senia_total') . "<br>";
+          echo "senia total : " . $this->input->post('total') . "<br>";
+
+          echo "cant_hab : " . $this->input->post('cant_hab') . "<br>";
+          echo "nombre_hab : " . $this->input->post('nombre_hab') . "<br>";
+          echo "precio_hab : " . $this->input->post('precio_hab') . "<br>";
+          echo "nombre_alojamiento : " . $this->input->post('nombre_alojamiento') . "<br>";
+          echo "id_alojamiento: " .$this->input->post('id_alojamiento') . "<br>";
+          echo "tipo_alojamiento : " . $this->input->post('tipo_alojamiento') . "<br>";
+          echo "localidad : " . $this->input->post('localidad') . "<br>";
+          echo "direccion : " . $this->input->post('direccion') . "<br>";
+          echo "checkin : " . $this->input->post('checkin') . "<br>";
+          echo "checkout : " . $this->input->post('checkout') . "<br>";
+          echo "descuento :" .$this->input->post('descuento')."<br>";
          * 
          * 
          * //password  Mis Reserva -------------------------------
-$str = "abcdefghijklmnopqrstuvwxyz1234567890";
-$pass = "";
-for($i=0;$i<7;$i++) {
-$pass .= substr($str,rand(0,36),1);
-}
+          $str = "abcdefghijklmnopqrstuvwxyz1234567890";
+          $pass = "";
+          for($i=0;$i<7;$i++) {
+          $pass .= substr($str,rand(0,36),1);
+          }
          * 
          * 
          * 
          * //banco
          * $datos_bancos =" <b>Entidad Bancaria:</b>".ucwords($row_bankdbh['banco'])."<br />
-  <b>Titular Cuenta:</b>".ucwords($row_bankdbh['titular']).".<br />
-  <b>Tipo de Cuenta:</b>".ucwords($row_bankdbh['tipo_cuenta'])."<br />
-  <b>Moneda:</b>".ucwords($row_bankdbh['moneda'])."<br />
-  <b>Numero de Cuenta :</b>".$row_bankdbh['num_cuenta']."<br />
-  <b>Sucursal:</b>".$row_bankdbh['sucursal']."<br />
-  <b>Cuit :</b>".$row_bankdbh['cuit']."<br />
-  <b>CBU:</b>".$row_bankdbh['CBU']."<br />";
-       */
-        
-        
-        
-        
-        
-     
-        
+          <b>Titular Cuenta:</b>".ucwords($row_bankdbh['titular']).".<br />
+          <b>Tipo de Cuenta:</b>".ucwords($row_bankdbh['tipo_cuenta'])."<br />
+          <b>Moneda:</b>".ucwords($row_bankdbh['moneda'])."<br />
+          <b>Numero de Cuenta :</b>".$row_bankdbh['num_cuenta']."<br />
+          <b>Sucursal:</b>".$row_bankdbh['sucursal']."<br />
+          <b>Cuit :</b>".$row_bankdbh['cuit']."<br />
+          <b>CBU:</b>".$row_bankdbh['CBU']."<br />";
+         */
     }
 
     //Arma el array que luego se mostrar en la vista

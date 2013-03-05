@@ -590,6 +590,7 @@ class Alojamientos extends CI_Controller
             $data['PaxAdulto'] = & $PaxAdulto;
             $data['PaxNinio'] = & $PaxNinio;
             $data['ID_TipoHabitacion'] = & $ID_TipoHabitacion;
+            $data['UnidadAlojativa']= & $UnidadAlojativa;
 
             //Traigo el ID_Cliente deseado
             $ID_Habitacion = $this->input->get('ID_Habitacion');
@@ -616,6 +617,7 @@ class Alojamientos extends CI_Controller
                 $PaxAdulto = $row->PaxAdulto;
                 $PaxNinio = $row->PaxNinio;
                 $ID_TipoHabitacion = $row->ID_TipoHabitacion;
+                $UnidadAlojativa=$row->UnidadAlojativa;
             }
 
             $data['menu_activo'] = 'habitaciones';
@@ -645,7 +647,8 @@ class Alojamientos extends CI_Controller
             'PaxMax' => $post_array['PaxMax'],
             'PaxAdulto' => $post_array['PaxAdulto'],
             'PaxNinio' => $post_array['PaxNinio'],
-            'ID_TipoHabitacion' => $post_array['ID_TipoHabitacion']
+            'ID_TipoHabitacion' => $post_array['ID_TipoHabitacion'],
+            'UnidadAlojativa' => $post_array['UnidadAlojativa']
         );
 
         if ($post_array['accion'] == 'crear')

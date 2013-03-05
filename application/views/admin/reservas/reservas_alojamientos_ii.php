@@ -275,7 +275,7 @@
             <input type="hidden" name="total" id="total" value="<?php echo $total ?>" >
             <input type="hidden" name="nombre_alojamiento" value="<?php echo $nombre_alojamiento ?>">
             <input type="hidden" name="id_alojamiento" value="<?php echo $id_alojamiento ?>"
-                   <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipo_alojamiento ?>"
+                   <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipoalojamiento ?>"
             <input type="hidden" name="tipo_alojamiento" value="<?php echo $tipoalojamiento ?>" >
             <input type="hidden" name="localidad" value="<?php echo $localidad ?>" >
             <input type="hidden" name="direccion" value="<?php echo  $direccion ?>">

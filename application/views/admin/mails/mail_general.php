@@ -162,33 +162,34 @@
                                 <tr>
                                     <td height='170' valign='top' bgcolor='' style='padding-left:10px;font-size:12px'>
                                         <br />
-                         <!-- foreach --><table>
+                                        <table><!-- foreach -->
                                             <tr>
-                                                <th>Habitacion</th>
-                                                <th>Cant.</th>
-                                                <th>Precio</th>
-                                                <th>Noches</th>
+                                                <th>Unidad</th>
+                                                <th>Reservo</th>
+                                                <th>Tarifas y noches</th>
                                                 <th>Subtotal</th>
                                             </tr>
-                                            <?php $total = 0 ?>
                                             <?php for ($i = 1; $i <= $cantidad_habitaciones; $i++): ?>
-                                                <?php $subtotal = $cant_por_hab[$i] * $precio_hab[$i] ?>
-                                                <?php $total = $subtotal + $total ?>
                                                 <tr>
+                                                    <td><?php echo $unidad_alojativa[$i] ?></td>
                                                     <td><?php echo $nombre_hab[$i] ?></td>
-                                                    <td><?php echo $cant_por_hab[$i] ?></td>
-                                                    <td><?php echo $precio_hab[$i] ?></td>
-                                                    <td><?php echo $cantidad_dias ?></td>
-                                                    <td>$<?php echo $subtotal ?></td>
-                                                </tr>
-                                            <?php endfor ?>
-                                            <tr>
-                                                <td>Total estadía </td>
-                                                <td><label id="total_estadia">$<?php echo $total ?></label></td>
-                                                <td>Descuento:</td>
-                                                <td><b>%</b> &nbsp;</td>
-                                                
-                                            </tr>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <?php for ($z = 1; $z <= $cantidad_dias; $z++): ?>
+                                                                    <!-- Para poder colorear cuando es tarifa o oferta (por eso esta dos veces) -->
+                                                                    <?php if ($tarifa_oferta[$i][$z] != 0): ?>
+                                                                        <td>$<?php echo $tarifa_oferta[$i][$z]."(".$fe_array[$z].")"; ?></td>
+                                                                    <?php else: ?>
+                                                                        <td>$<?php echo $tarifa_normal[$i][$z]."(".$fe_array[$z].")"; ?></td>
+                                                                    <?php endif; ?>
+                                                                <?php endfor; ?>
+
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+
+                                                <?php endfor; ?>
                                         </table>
                                     </td>
                                 </tr>

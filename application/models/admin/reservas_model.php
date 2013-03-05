@@ -267,4 +267,35 @@ class Reservas_model extends CI_Model
         $row=$row->row();
         return $row->Responsable;
     }
+    
+    function precio_cal_calendar($id_habitacion,$fecha)
+    {
+      $query=sprintf("
+                        select 
+                        c.tarifa_oferta, c.tarifa_normal
+                        from
+                        cal_calendario c
+                        where 
+                        c.id_habitacion=%s 
+                        and c.fecha='%s'",$id_habitacion,$fecha); 
+      
+      $row = $this->db->query($query);
+      $row = $row->row();
+      return $row;
+    }
+    
+    function datos_habitacion($id_habitacion)
+    {
+        $query=sprintf("
+                        select 
+                        NombreHab, UnidadAlojativa
+                        from
+                        habitaciones
+                        where
+                        id_habitacion = %s",$id_habitacion); 
+      
+      $row = $this->db->query($query);
+      $row = $row->row();
+      return $row;
+    }
 }
