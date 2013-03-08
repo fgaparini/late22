@@ -1,12 +1,15 @@
 <?php
 
-class Pruebas extends CI_Controller {
+class Pruebas extends CI_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function index() {
+    function index()
+    {
         $query = "
                     
                     select ah.ID_Alojamiento as a, ah.ID_Habitacion as b, cal_calendario.fecha as c  
@@ -30,17 +33,21 @@ class Pruebas extends CI_Controller {
         $alojamientos = array();
         $habitaciones = array();
         $fechas = array();
-        foreach ($rows as $var) {
+        foreach ($rows as $var)
+        {
             $count++;
-            if ($count == 1) {
+            if ($count == 1)
+            {
                 $id_alojamiento = $var['a'];
                 $id_habitacion = $var['b'];
             }
 
             array_unshift($fechas, $var['c']);
-            if ($id_habitacion != $var['b'] or $count == $total) {
+            if ($id_habitacion != $var['b'] or $count == $total)
+            {
                 array_unshift($habitaciones, $var['b']);
-                if ($id_alojamiento != $var['a'] or $count == $total) {
+                if ($id_alojamiento != $var['a'] or $count == $total)
+                {
 
                     $final = array(
                         'id_aloamiento' => $var['a'],
@@ -63,22 +70,26 @@ class Pruebas extends CI_Controller {
             $id_habitacion = $var['b'];
         }
 
-        foreach ($final_total as $var) {
+        foreach ($final_total as $var)
+        {
             echo $var[0][0][0];
         }
 
         print_r($final_total);
     }
 
-    function prueba2() {
+    function prueba2()
+    {
         $array = array('uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho');
 
-        foreach ($array as $var) {
+        foreach ($array as $var)
+        {
             echo count($array) . " ";
         }
     }
 
-    function mostrar() {
+    function mostrar()
+    {
         $general = array(
             $a1 = array(
         'id_alojamiento' => '1',
@@ -205,62 +216,88 @@ class Pruebas extends CI_Controller {
             ),
         );
 
-        $id_alojamiento = 0;
-        $id_habitacion = 0;
-        $habitaciones = array();
-        $fechas = array();
-        $fe = array();
-        $alo = array();
-        $alojamientos = array();
-        $count = 0;
-        foreach ($general as $var) {
-            $count++;
 
-            if ($count == 1) {
-                $id_habitacion = $var['id_habitacion'];
-            }
+        $i = 0;
+        $z=0;
+        $y=0;
+        $id_alo = "";
+        $id_hab = "";
+        $id_fecha = "";
+        $id_alo_array = "";
+        foreach ($general as $var)
+        {
+            if($id_alo!=$var['id_alojamiento'])
+              $i++;
+            if($id_hab!=$var['id_habitacion'])
+                $z++;
+            if($id_fecha!=$var['fecha'])
+                $y++;
 
-            if ($id_habitacion != $var['id_habitacion']) {
-                $hab = array(
-                    'id_habitacion' => $var['id_habitacion'],
-                    'fechas' => $fechas
-                );
-                array_unshift($habitaciones, $hab);
-                $fechas = array();
+            echo $i."-".$z."-".$y."<br>";
 
-                if ($id_alojamiento != $var['id_alojamiento']) {
-                    $alo = array(
-                        'id_alojamiento' => $var['id_alojamiento'],
-                        'habitacion' => $habitaciones
-                    );
-                    array_unshift($alojamientos, $alo);
-                    $habitaciones = array();
-                }
-            }
-
-            $fe = array(
-                'fecha' => $var['fecha'],
-            );
-            array_unshift($fechas, $fe);
-            $id_alojamiento = $var['id_alojamiento'];
-            $id_habitacion = $var['id_habitacion'];
+            $id_alo = $var['id_alojamiento'];
+            $id_hab = $var['id_habitacion'];
+            $id_fecha = $var['fecha'];
         }
 
+        /*
+
+          $id_alojamiento = 0;
+          $id_habitacion = 0;
+          $habitaciones = array();
+          $fechas = array();
+          $fe = array();
+          $alo = array();
+          $alojamientos = array();
+          $count = 0;
+          foreach ($general as $var) {
+          $count++;
+
+          if ($count == 1) {
+          $id_habitacion = $var['id_habitacion'];
+          }
+
+          if ($id_habitacion != $var['id_habitacion']) {
+          $hab = array(
+          'id_habitacion' => $var['id_habitacion'],
+          'fechas' => $fechas
+          );
+          array_unshift($habitaciones, $hab);
+          $fechas = array();
+
+          if ($id_alojamiento != $var['id_alojamiento']) {
+          $alo = array(
+          'id_alojamiento' => $var['id_alojamiento'],
+          'habitacion' => $habitaciones
+          );
+          array_unshift($alojamientos, $alo);
+          $habitaciones = array();
+          }
+          }
+
+          $fe = array(
+          'fecha' => $var['fecha'],
+          );
+          array_unshift($fechas, $fe);
+          $id_alojamiento = $var['id_alojamiento'];
+          $id_habitacion = $var['id_habitacion'];
+          }
 
 
 
-        foreach ($alojamientos as $var) {
 
-            echo "id_alojamiento: " . $var['id_alojamiento'] . "  <br>";
+          foreach ($alojamientos as $var) {
 
-            foreach ($var['habitacion'] as $var0) {
-                echo "id_habitacion: " . $var0['id_habitacion'] . "<br>";
+          echo "id_alojamiento: " . $var['id_alojamiento'] . "  <br>";
 
-                foreach ($var0['fechas'] as $var1) {
-                    echo "fecha: " . $var1['fecha'] . "<br>";
-                }
-            }
-        }
+          foreach ($var['habitacion'] as $var0) {
+          echo "id_habitacion: " . $var0['id_habitacion'] . "<br>";
+
+          foreach ($var0['fechas'] as $var1) {
+          echo "fecha: " . $var1['fecha'] . "<br>";
+          }
+          }
+          } */
     }
 
 }
